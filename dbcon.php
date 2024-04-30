@@ -1,5 +1,5 @@
 <?php
-$server = "mysql:host=localhost;dbname=navttc";
+$server = "mysql:host=localhost;dbname=navttc1";
 $user = "root";
 $pass = "";
 $pdo = new PDO($server, $user, $pass);
