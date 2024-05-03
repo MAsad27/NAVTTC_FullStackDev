@@ -19,7 +19,7 @@ if(isset($_GET['id'])){
                     <div class="col-md-10">
                         <h3>Add Category</h3>
 
-                <form action="query.php" method="post" enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data">
                 <div class="form-group" >
                     <label for="">Category Name</label>
                     <input type="text"  value="<?php echo $singleCat['Name']?>" name="cName" id="" class="form-control" placeholder="" aria-describedby="helpId">
