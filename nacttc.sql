@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2024 at 01:46 PM
+-- Generation Time: May 03, 2024 at 01:24 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `navttc`
+-- Database: `nacttc`
 --
 
 -- --------------------------------------------------------
@@ -40,7 +40,7 @@ CREATE TABLE `categories` (
 
 INSERT INTO `categories` (`id`, `Name`, `Description`, `image`) VALUES
 (1, 'Bag', 'abc', '123.jpg'),
-(2, 'Laptop', 'qwe', '123.jpg'),
+(2, 'Laptops', 'qwe', '123.jpg'),
 (3, 'Computer', 'HP', 'maxresdefault.jpg'),
 (4, 'Computer', 'Dell', 'index.html'),
 (5, 'Computer', 'Dell', 'GROUP DETAIL OF PR2202311F.xlsx'),
@@ -50,7 +50,32 @@ INSERT INTO `categories` (`id`, `Name`, `Description`, `image`) VALUES
 (9, 'Pen', 'Piano', 'navttc.sql'),
 (10, 'Bag', 'Dell', 'index.html'),
 (11, 'Bag', 'abc', 'navttc.sql'),
-(12, 'Bag', 'abc', 'maxresdefault.jpg');
+(12, 'Bag', 'abc', 'maxresdefault.jpg'),
+(13, 'asd', 'er', 'testimonial-1.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `products`
+--
+
+CREATE TABLE `products` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `description` varchar(200) NOT NULL,
+  `price` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  `image` varchar(500) NOT NULL,
+  `catid` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `quantity`, `image`, `catid`) VALUES
+(1, 'Hand Bag', 'asd', 5000, 2, 'ttt.jpg', 1),
+(2, 'abc', 'asd', 12345, 1, 'Screenshot 2024-02-29 174953.png', 9);
 
 -- --------------------------------------------------------
 
@@ -95,6 +120,13 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `products`
+--
+ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `catid` (`catid`);
+
+--
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
@@ -110,13 +142,29 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `categories`
 --
 ALTER TABLE `categories`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+
+--
+-- AUTO_INCREMENT for table `products`
+--
+ALTER TABLE `products`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `products`
+--
+ALTER TABLE `products`
+  ADD CONSTRAINT `products_ibfk_1` FOREIGN KEY (`catid`) REFERENCES `categories` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
