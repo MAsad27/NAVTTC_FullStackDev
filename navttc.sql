@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2024 at 01:26 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.2
+-- Generation Time: May 06, 2024 at 01:08 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -45,7 +44,6 @@ INSERT INTO `categories` (`id`, `Name`, `Description`, `image`) VALUES
 (3, 'Laptop', 'HP', 'maxresdefault.jpg'),
 (5, 'Purse', 'Carry', 'OIP.jfif'),
 (8, 'Volit', 'Pocket bag', 'OIP.jfif'),
-(9, 'Pen', 'Piano', 'navttc.sql'),
 (12, 'Bag', 'abc', 'maxresdefault.jpg'),
 (13, 'asd', 'er', 'testimonial-1.jpg'),
 (14, 'Mobile', 'Techno', 'Mob.jpg');
@@ -106,6 +104,32 @@ INSERT INTO `students` (`id`, `name`, `email`, `age`, `city`, `gender`, `salary`
 (7, 'yaqoob', 'yaqoob@gma', 27, 'Islamabad', 'male', '42500', 'management', 'gulshan e hadeed'),
 (8, 'iqra', 'iqra@gmail', 21, 'Islamabad', 'female', '53500', 'technical', 'North');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `users`
+--
+
+CREATE TABLE `users` (
+  `id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `email` varchar(200) NOT NULL,
+  `password` varchar(300) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
+(1, 'ASD', '1212', '12'),
+(2, 'ASD', 'ASD', '12'),
+(3, 'asad', 'aaa', '34'),
+(4, 'ghjgh', 'aaa6', '346'),
+(5, 'ghjbnm', 'vbn', '67'),
+(6, 'Shabhi', 'Shabiii', '10fff7184284f1cab3c739cd5130de6f1c5e831b'),
+(7, 'AQSA', 'AQSA@GNAIL.COM', '?V\'?ÙrGA:Ir??R]msp');
+
 --
 -- Indexes for dumped tables
 --
@@ -132,6 +156,12 @@ ALTER TABLE `students`
   ADD UNIQUE KEY `UNION_email` (`email`);
 
 --
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -152,6 +182,12 @@ ALTER TABLE `products`
 --
 ALTER TABLE `students`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Constraints for dumped tables
