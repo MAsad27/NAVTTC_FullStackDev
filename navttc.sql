@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2024 at 08:28 AM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.2
+-- Generation Time: May 07, 2024 at 12:54 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -115,20 +114,22 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL,
   `name` varchar(200) NOT NULL,
   `email` varchar(200) NOT NULL,
-  `password` varchar(300) NOT NULL
+  `password` varchar(300) NOT NULL,
+  `roleid` int(11) NOT NULL DEFAULT 2
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
-(6, 'Shabhi', 'Shabiii', '10fff7184284f1cab3c739cd5130de6f1c5e831b'),
-(8, 'Hamza', 'hamza@gmail.com', 'd798d4338adeb553a1089a58e61e18c2fcdf77bb'),
-(9, 'Asad', 'asd@gmail.com', '123'),
-(10, 'ali', 'ali@gmail.com', '749bc367fd90880f2d6dbe578e98e14645b0b26d'),
-(11, 'Ahsan', 'ahsan@gmail.com', '056eafe7cf52220de2df36845b8ed170c67e23e3'),
-(12, 'kashif', 'kashi@gmail.com', '95938f7d0a9581a694282ebac1c4c49e0e19c1cd');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `roleid`) VALUES
+(6, 'Shabhi', 'Shabiii', '10fff7184284f1cab3c739cd5130de6f1c5e831b', 2),
+(8, 'Hamza', 'hamza@gmail.com', 'd798d4338adeb553a1089a58e61e18c2fcdf77bb', 2),
+(10, 'Ali', 'ali@gmail.com', '749bc367fd90880f2d6dbe578e98e14645b0b26d', 2),
+(11, 'Ahsan', 'ahsan@gmail.com', '056eafe7cf52220de2df36845b8ed170c67e23e3', 2),
+(12, 'kashif', 'kashi@gmail.com', '95938f7d0a9581a694282ebac1c4c49e0e19c1cd', 2),
+(13, 'ahmad', 'ahamd@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2),
+(14, 'asad', 'asad@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1);
 
 --
 -- Indexes for dumped tables
@@ -187,7 +188,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
