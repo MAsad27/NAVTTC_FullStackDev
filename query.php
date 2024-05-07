@@ -1,6 +1,7 @@
 <?php
 include('adminPanel/dbcon.php');
 
+// Sign-up Start
 $uName = $uEmail = $uPwd = $ucPwd = "";
 $unameerr = $uemailerr = $upwderr = $ucpwderr = "";
 if(isset($_POST['signUp'])){
@@ -34,17 +35,47 @@ if(isset($_POST['signUp'])){
         }
     }
     if(empty($unameerr)&& empty($uemailerr) && empty($upwderr) && empty($ucpwderr) ){
-        $hashpwd = sha1($uPwd,TRUE);
+        $hashpwd = sha1($uPwd);
         $query = $pdo->prepare("insert into users (name, email, password) values (:uname, :uemail, :upwd) ");
         $query->bindParam(':uname' , $uName);
         $query->bindParam(':uemail' , $uEmail);
         $query->bindParam(':upwd' , $hashpwd);
         $query->execute();
-        echo "<script>alert('User has been Registered, Please sign-in')</script>";
+        echo "<script>alert('Registeration successful, Please sign-in');
+        location.assign('login.php')</script>";
         $uName = $uEmail = $uPwd = $ucPwd = "";
     }
 
 
 }
+// Sign-up End 
 
+// Login Start
+$loginnameerr = $loginpwderr = "";
+if(isset($_POST['login'])){
+    $loginName = $_POST['loginname'];
+    $loginPwd = $_POST['loginpwd'];
+    if(empty($loginName)){
+        $loginnameerr = "Please Enter Username";
+    }
+    if(empty($_POST['loginpwd'])){
+        $loginpwderr = "Please enter password";
+    }
+    if($loginName !== "" && $loginPwd !== ""){
+        $query = $pdo->query("select * from users ");
+        $userdetails = $query->fetchAll(PDO::FETCH_ASSOC);
+        foreach($userdetails as $emailpwd){
+            // print_r($emailpwd) ;
+            $dehashpwd = $emailpwd['password'];
+            $hashloginpwd = sha1($loginPwd);
+            if($emailpwd['email'] === $loginName && $dehashpwd === $hashloginpwd ){
+                echo "<script>location.assign('index.php');
+                </script>";
+            } else{
+                $loginnameerr = "Login user or password is invalid";
+            }
+        }
+    }
+}
+// Login End
 ?>
