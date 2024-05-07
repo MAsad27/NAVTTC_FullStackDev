@@ -1,5 +1,10 @@
 <?php
+include('query.php');
 include('header.php');
+
+if(!isset($_SESSION['adminemail'])){
+    echo "<script>location.assign('../index.php')</script>";
+}
 ?>
             <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4">

@@ -1,6 +1,6 @@
 <?php
 include('dbcon.php');
-
+session_start();
 //-- Add Category Start --
 
 if(isset($_POST['add'])){

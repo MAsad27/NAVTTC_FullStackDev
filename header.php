@@ -107,6 +107,27 @@
 							<li>
 								<a href="contact.html">Contact</a>
 							</li>
+							<?php
+							if(isset($_SESSION['useremail'])){
+								
+							?>	
+								<li>
+								<a href="logout.php">Logout</a>
+								</li>
+							<?php
+							}else{
+							?>
+							<li>
+								<a href="signup.php">Sign Up</a>
+							</li>
+							<li>
+								<a href="login.php">Login</a>
+							</li>
+							<?php
+							}
+							?>
+							
+							
 						</ul>
 					</div>	
 
@@ -221,6 +242,7 @@
 				<li>
 					<a href="contact.html">Contact</a>
 				</li>
+				
 			</ul>
 		</div>
 

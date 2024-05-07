@@ -1,6 +1,8 @@
 <?php
 include('adminPanel/dbcon.php');
 
+session_start();
+
 // Sign-up Start
 $uName = $uEmail = $uPwd = $ucPwd = "";
 $unameerr = $uemailerr = $upwderr = $ucpwderr = "";
@@ -69,8 +71,19 @@ if(isset($_POST['login'])){
             $dehashpwd = $emailpwd['password'];
             $hashloginpwd = sha1($loginPwd);
             if($emailpwd['email'] === $loginName && $dehashpwd === $hashloginpwd ){
-                echo "<script>location.assign('index.php');
+               if($emailpwd['roleid'] == 1 ){
+                $_SESSION['adminid'] = $emailpwd['id'];
+                $_SESSION['adminemail'] = $emailpwd['email'];
+                echo "<script>location.assign('AdminPanel/index.php');
                 </script>";
+               } 
+               else if($emailpwd['roleid'] == 2){
+                $_SESSION['userid'] = $emailpwd['id'];
+                $_SESSION['useremail'] = $emailpwd['email'];
+                echo "<script>location.assign('index.php')</script>";
+                
+               }
+                
             } else{
                 $loginnameerr = "Login user or password is invalid";
             }
