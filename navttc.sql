@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 06, 2024 at 01:08 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: May 07, 2024 at 08:28 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -122,13 +123,12 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`) VALUES
-(1, 'ASD', '1212', '12'),
-(2, 'ASD', 'ASD', '12'),
-(3, 'asad', 'aaa', '34'),
-(4, 'ghjgh', 'aaa6', '346'),
-(5, 'ghjbnm', 'vbn', '67'),
 (6, 'Shabhi', 'Shabiii', '10fff7184284f1cab3c739cd5130de6f1c5e831b'),
-(7, 'AQSA', 'AQSA@GNAIL.COM', '?V\'?ÙrGA:Ir??R]msp');
+(8, 'Hamza', 'hamza@gmail.com', 'd798d4338adeb553a1089a58e61e18c2fcdf77bb'),
+(9, 'Asad', 'asd@gmail.com', '123'),
+(10, 'ali', 'ali@gmail.com', '749bc367fd90880f2d6dbe578e98e14645b0b26d'),
+(11, 'Ahsan', 'ahsan@gmail.com', '056eafe7cf52220de2df36845b8ed170c67e23e3'),
+(12, 'kashif', 'kashi@gmail.com', '95938f7d0a9581a694282ebac1c4c49e0e19c1cd');
 
 --
 -- Indexes for dumped tables
@@ -187,7 +187,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
