@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 07, 2024 at 12:54 PM
+-- Generation Time: May 08, 2024 at 01:35 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -70,7 +70,9 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `quantity`, `image`, `catid`) VALUES
 (2, 'Gaon', 'ASD', 5000, 2, 'Screenshot 2024-02-29 174953.png', 13),
-(3, 'Techno', 'Mob', 45000, 1, 'Mob.jpg', 14);
+(3, 'Techno', 'Mob', 45000, 1, 'Mob.jpg', 14),
+(5, 'Hand Bag', 'asd', 5000, 2, 'images.jfif', 1),
+(6, 'Hand Carry', 'bag', 12345, 1, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -129,7 +131,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `roleid`) VALUES
 (11, 'Ahsan', 'ahsan@gmail.com', '056eafe7cf52220de2df36845b8ed170c67e23e3', 2),
 (12, 'kashif', 'kashi@gmail.com', '95938f7d0a9581a694282ebac1c4c49e0e19c1cd', 2),
 (13, 'ahmad', 'ahamd@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2),
-(14, 'asad', 'asad@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1);
+(14, 'asad', 'asad@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1),
+(15, 'Admin', 'admin', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2);
 
 --
 -- Indexes for dumped tables
@@ -176,7 +179,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `students`
@@ -188,7 +191,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- Constraints for dumped tables
