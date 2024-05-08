@@ -74,6 +74,7 @@ if(isset($_POST['login'])){
                if($emailpwd['roleid'] == 1 ){
                 $_SESSION['adminid'] = $emailpwd['id'];
                 $_SESSION['adminemail'] = $emailpwd['email'];
+                $_SESSION['adminname'] = $emailpwd['name'];
                 echo "<script>location.assign('AdminPanel/index.php');
                 </script>";
                } 
