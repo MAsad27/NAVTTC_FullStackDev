@@ -256,13 +256,8 @@ include "header.php";
 					$query->bindParam(':cid', $categoryid);
 					$query->execute();
 					$prodata = $query->fetchAll(PDO::FETCH_ASSOC);
-					$countquery = $pdo->prepare("select count(*) from products where catid = :catid");
-					$countquery->bindParam(':catid', $categoryid);
-					$countquery->execute();
-					$proCountdata = $query->fetchAll(PDO::FETCH_ASSOC);
-					if($proCountdata>0){
-						
-					
+					$countProduct = count($prodata);
+					if($countProduct>0){
 					foreach($prodata as $pdata){
 						// print_r($pdata);
 					?>
