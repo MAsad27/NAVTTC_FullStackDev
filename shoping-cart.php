@@ -3,6 +3,26 @@ include "query.php";
 include "header.php";
 ?>
 
+<?php
+if(isset($_POST['addToCart'])){
+	if($_SESSION['cart']){
+		$id= array_column($_SESSION['cart'],'id');
+		if(in_array($_POST['pid'],$id)){
+			echo "<script>alert('Cart is already added')</script>";
+		} else{
+		$count = count($_SESSION['cart']);
+		$_SESSION['cart'][$count]= array("id"=>$_POST['pid'], "name"=>$_POST['pName'], "qty"=>$_POST['num-product'], "description"=>$_POST['pDes'], "price"=>$_POST['pPrice'],"image"=>$_POST['pImage']);
+		echo "<script>alert('Cart added')</script>";
+		}
+	}else{
+		$_SESSION['cart'][0] = array("id"=>$_POST['pid'], "name"=>$_POST['pName'], "qty"=>$_POST['num-product'], "description"=>$_POST['pDes'], "price"=>$_POST['pPrice'],"image"=>$_POST['pImage']);
+		echo "<script>alert('Cart added')</script>";
+	}
+}
+if(isset($_GET['unset'])){
+	unset($_SESSION['cart']);
+}
+?>
 	<!-- breadcrumb -->
 	<div class="container p-3 mt-5">
 		<div class="bread-crumb flex-w p-l-25 p-r-15 p-t-30 p-lr-0-lg">
@@ -33,58 +53,42 @@ include "header.php";
 									<th class="column-3">Price</th>
 									<th class="column-4">Quantity</th>
 									<th class="column-5">Total</th>
+									<th class="column-5">Remove</th>
 								</tr>
 								<?php
-								$query = $pdo->query()
+								if(isset($_SESSION['cart'])){
+									foreach($_SESSION['cart'] as $value){
+										$totalprice = $value['qty'] * $value['price'];
 								?>
 
 								<tr class="table_row">
 									<td class="column-1">
 										<div class="how-itemcart1">
-											<img src="images/item-cart-04.jpg" alt="IMG">
+											<img src="AdminPanel/img/<?php echo $value['image'] ?>" alt="IMG">
 										</div>
 									</td>
-									<td class="column-2">Fresh Strawberries</td>
-									<td class="column-3">$ 36.00</td>
+									<td class="column-2"><?php echo $value['name'] ?></td>
+									<td class="column-3"><?php echo $value['price'] ?></td>
 									<td class="column-4">
 										<div class="wrap-num-product flex-w m-l-auto m-r-0">
 											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
 												<i class="fs-16 zmdi zmdi-minus"></i>
 											</div>
 
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="1">
+											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product1" value="<?php echo $value['qty'] ?>">
 
 											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
 												<i class="fs-16 zmdi zmdi-plus"></i>
 											</div>
 										</div>
 									</td>
-									<td class="column-5">$ 36.00</td>
-								</tr>
-
-								<tr class="table_row">
-									<td class="column-1">
-										<div class="how-itemcart1">
-											<img src="images/item-cart-05.jpg" alt="IMG">
-										</div>
-									</td>
-									<td class="column-2">Lightweight Jacket</td>
-									<td class="column-3">$ 16.00</td>
-									<td class="column-4">
-										<div class="wrap-num-product flex-w m-l-auto m-r-0">
-											<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-minus"></i>
-											</div>
-
-											<input class="mtext-104 cl3 txt-center num-product" type="number" name="num-product2" value="1">
-
-											<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-												<i class="fs-16 zmdi zmdi-plus"></i>
-											</div>
-										</div>
-									</td>
-									<td class="column-5">$ 16.00</td>
-								</tr>
+									<td class="column-5"><?php echo $totalprice ?></td>
+									<td class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer"> <a href=""> Remove</a> </td>
+								
+								<?php
+									}
+								}
+								?>								
 							</table>
 						</div>
 
@@ -100,6 +104,8 @@ include "header.php";
 							<div class="flex-c-m stext-101 cl2 size-119 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer m-tb-10">
 								Update Cart
 							</div>
+							
+							
 						</div>
 					</div>
 				</div>
@@ -185,6 +191,9 @@ include "header.php";
 						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
 							Proceed to Checkout
 						</button>
+						<br>
+						<a class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" name="" href="?unset" >Clear Cart</a>
+						
 					</div>
 				</div>
 			</div>
