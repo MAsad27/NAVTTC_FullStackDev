@@ -67,16 +67,17 @@ include "header.php";
 						</div>
 					</div>
 				</div>
+				
 				<?php
 				if(isset($_GET['pid'])){
 					$id = $_GET['pid'];
-					$query = $pdo->prepare("select * from products where id=:id");
-					$query->bindParam(':id', $id);
+					$query = $pdo->prepare("select * from products where id= :pid");
+					$query->bindParam(':pid', $id);
+					$query->execute();
 					$allProducts = $query->fetchAll(PDO::FETCH_ASSOC);
+					//  print_r($allProducts);
 					foreach($allProducts as $proData){
-	
-				
-				
+						
 				?>
 				<div class="col-md-6 col-lg-5 p-b-30">
 					<div class="p-r-50 p-t-5 p-lr-0-lg">
@@ -85,13 +86,16 @@ include "header.php";
 						</h4>
 
 						<span class="mtext-106 cl2">
-							$58.79
+						<?php echo $proData['price']?>
 						</span>
 
 						<p class="stext-102 cl3 p-t-23">
-							Nulla eget sem vitae eros pharetra viverra. Nam vitae luctus ligula. Mauris consequat ornare feugiat.
+						<?php echo $proData['description']?>
 						</p>
-						
+						<?php
+						}
+				}
+						?>
 						<!--  -->
 						<div class="p-t-33">
 							<div class="flex-w flex-r-m p-b-10">
@@ -175,10 +179,7 @@ include "header.php";
 						</div>
 					</div>
 				</div>
-				<?php
-				}
-			}
-				?>
+				
 			</div>
 
 			<div class="bor10 m-t-50 p-t-43 p-b-40">
@@ -457,7 +458,7 @@ include "header.php";
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										Only Check Trouser
 									</a>
 
@@ -489,7 +490,7 @@ include "header.php";
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										Classic Trench Coat
 									</a>
 
@@ -521,7 +522,7 @@ include "header.php";
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										Front Pocket Jumper
 									</a>
 
@@ -553,7 +554,7 @@ include "header.php";
 
 							<div class="block2-txt flex-w flex-t p-t-14">
 								<div class="block2-txt-child1 flex-col-l ">
-									<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+									<a href="product-detail.php" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 										Vintage Inspired Classic 
 									</a>
 
