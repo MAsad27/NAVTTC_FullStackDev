@@ -155,7 +155,7 @@ include('header.php');
 					// print_r($allCat);
 					foreach($allCat as $cat){
 					?>	
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".<?php echo $cat['id']?>">
 						<?php echo $cat['Name'] ?>
 					</button>
 					<?php
@@ -387,7 +387,7 @@ include('header.php');
 				foreach($allProducts as $proData){
 
 				?>
-				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item women">
+				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item <?php echo $proData['catid']?>">
 					<!-- Block2 -->
 					<div class="block2">
 						<div class="block2-pic hov-img0">

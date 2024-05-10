@@ -83,11 +83,21 @@ if(isset($_GET['unset'])){
 										</div>
 									</td>
 									<td class="column-5"><?php echo $totalprice ?></td>
-									<td class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer"> <a href=""> Remove</a> </td>
+									<td class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer"> <a href="?id=<?php echo $value['id']?>" name="cartremovebtn"> Remove</a> </td>
 								
 								<?php
 									}
 								}
+                                if(isset($_GET['id'])){
+                                    $id = $_GET['id'];
+                                    // $array = array('$id');
+                                    unset($_SESSION['cart']['$id']);
+                                    // $sessionid = $_SESSION['cart']
+                                    // if($id== $_SESSION['cart']['id']){
+                                        echo "<script>alert('cart removed')</script>";
+                                    // }
+                                   
+                                }
 								?>								
 							</table>
 						</div>
