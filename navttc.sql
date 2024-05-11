@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 08, 2024 at 01:35 PM
+-- Generation Time: May 11, 2024 at 01:10 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -47,6 +47,25 @@ INSERT INTO `categories` (`id`, `Name`, `Description`, `image`) VALUES
 (12, 'Bag', 'abc', 'maxresdefault.jpg'),
 (13, 'asd', 'er', 'testimonial-1.jpg'),
 (14, 'Mobile', 'Techno', 'Mob.jpg');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `p_id` int(11) NOT NULL,
+  `p_name` varchar(200) NOT NULL,
+  `p_qty` int(11) NOT NULL,
+  `p_price` int(11) NOT NULL,
+  `u_id` int(11) NOT NULL,
+  `u_name` varchar(200) NOT NULL,
+  `u_email` varchar(200) NOT NULL,
+  `status` varchar(200) DEFAULT NULL,
+  `dateTime` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -145,6 +164,12 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
@@ -174,6 +199,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `products`

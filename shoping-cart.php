@@ -83,20 +83,22 @@ if(isset($_GET['unset'])){
 										</div>
 									</td>
 									<td class="column-5"><?php echo $totalprice ?></td>
-									<td class="flex-c-m stext-101 cl2 size-118 bg8 bor13 hov-btn3 p-lr-15 trans-04 pointer"> <a href="?id=<?php echo $value['id']?>" name="cartremovebtn"> Remove</a> </td>
+									<td class="column-5 "> <a class="btn btn-info bg-danger" href="?remove=<?php echo $value['id']?>" name="cartremovebtn"> Remove</a> </td>
 								
 								<?php
 									}
 								}
-                                if(isset($_GET['id'])){
-                                    $id = $_GET['id'];
-                                    // $array = array('$id');
-                                    unset($_SESSION['cart']['$id']);
-                                    // $sessionid = $_SESSION['cart']
-                                    // if($id== $_SESSION['cart']['id']){
-                                        echo "<script>alert('cart removed')</script>";
-                                    // }
-                                   
+                                if(isset($_GET['remove'])){
+                                    $removePid = $_GET['remove'];
+									foreach($_SESSION['cart'] as $key=>$val){
+										if($val['id'] == $removePid ){
+											unset($_SESSION['cart'][$key]);
+											$_SESSION['cart'] = array_values($_SESSION['cart']);
+											echo "<script>alert('cart removed')
+											location.assign('shoping-cart.php')</script>";
+											
+										}
+									}
                                 }
 								?>								
 							</table>
@@ -134,9 +136,20 @@ if(isset($_GET['unset'])){
 							</div>
 
 							<div class="size-209">
-								<span class="mtext-110 cl2">
-									$79.65
+								<?php
+								if(isset($_SESSION['cart'])){
+									$grandTotal = 0;
+									foreach($_SESSION['cart'] as $sTotal){
+										$subtotal = $sTotal['qty'] * $sTotal['price'];
+										$grandTotal += $subtotal;
+									}
+									?>
+									<span class="mtext-110 cl2">
+									Rs. <?php echo $grandTotal?>/-
 								</span>
+								<?php
+								}
+								?>
 							</div>
 						</div>
 
@@ -197,10 +210,53 @@ if(isset($_GET['unset'])){
 								</span>
 							</div>
 						</div>
+						<?php
+						if(isset($_GET['checkout'])){						
+									$uid = $_SESSION['userid'];
+									$uEmail = $_SESSION['useremail'];
+									$uName = $_SESSION['username'];
+									foreach($_SESSION['cart'] as $data){
+										$pid = $data['id'];
+										$pName = $data['name'];
+										$pPrice = $data['price'];
+										$pQty = $data['qty'];
+										$query = $pdo -> prepare("insert into orders (p_id, p_name, p_qty,p_price, u_id, u_name, u_email) values (:pid,:pname,:pqty,:pprice,:uid,:uname,:uemail)");
+									$query->bindParam(':pid',$pid);
+									$query->bindParam(':pname',$pName);
+									$query->bindParam(':pqty',$pQty);
+									$query->bindParam(':pprice',$pPrice);
+									$query->bindParam(':uid',$uid);
+									$query->bindParam(':uname',uName);
+									$query->bindParam(':uemail',uEmail);
+									$query->execute();
+									}
+									
+									unset($_SESSION['cart']);
+									
 
-						<button class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+								}
+						
+						?>
+						<?php
+						if(isset($_SESSION['useremail'])){
+
+							?>
+
+						<a href="?checkout"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
 							Proceed to Checkout
-						</button>
+						</a>
+                        <?php
+						}
+						else{
+						?>
+
+						<a href="login.php"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
+							Proceed to Checkout
+						</a>
+
+						<?php
+						}
+						?>
 						<br>
 						<a class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" name="" href="?unset" >Clear Cart</a>
 						

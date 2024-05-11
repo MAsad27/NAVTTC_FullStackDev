@@ -81,6 +81,7 @@ if(isset($_POST['login'])){
                else if($emailpwd['roleid'] == 2){
                 $_SESSION['userid'] = $emailpwd['id'];
                 $_SESSION['useremail'] = $emailpwd['email'];
+                $_SESSION['username'] = $emailpwd['name'];
                 echo "<script>location.assign('index.php')</script>";
                 
                }
