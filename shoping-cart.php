@@ -22,6 +22,46 @@ if(isset($_POST['addToCart'])){
 if(isset($_GET['unset'])){
 	unset($_SESSION['cart']);
 }
+
+
+
+
+
+if(isset($_GET['checkout'])){						
+			$uid = $_SESSION['userid'];
+			$uEmail = $_SESSION['useremail'];
+			$uName = $_SESSION['username'];
+			print_r($uName);
+			if(isset($_SESSION['cart'])){
+				if(count($_SESSION['cart'])>0){
+			foreach($_SESSION['cart'] as $key=>$value){
+				$pid = $value['id'];
+				$pName = $value['name'];
+				$pPrice = $value['price'];
+				$pQty = $value['qty'];
+				$query = $pdo -> prepare("insert into orders (p_id, p_name, p_qty,p_price, u_id, u_name, u_email) values (:pid,:pname,:pqty,:pprice,:uid,:uname,:uemail)");
+			$query->bindParam(':pid',$pid);
+			$query->bindParam(':pname',$pName);
+			$query->bindParam(':pqty',$pQty);
+			$query->bindParam(':pprice',$pPrice);
+			$query->bindParam(':uid',$uid);
+			$query->bindParam(':uname',$uName);
+			$query->bindParam(':uemail',$uEmail);
+			$query->execute();
+
+			$update = $pdo->prepare("UPDATE products SET quantity = quantity - :orderedQty where id = :productId");
+			$update->bindParam('orderedQty', $pQty);
+			$update->bindParam('productId', $pid);
+			$update->execute();
+			echo "<script>alert('order placed successfully')</script>";
+			}
+		}
+
+	}
+	unset($_SESSION['cart']);
+
+}
+
 ?>
 	<!-- breadcrumb -->
 	<div class="container p-3 mt-5">
@@ -210,33 +250,7 @@ if(isset($_GET['unset'])){
 								</span>
 							</div>
 						</div>
-						<?php
-						if(isset($_GET['checkout'])){						
-									$uid = $_SESSION['userid'];
-									$uEmail = $_SESSION['useremail'];
-									$uName = $_SESSION['username'];
-									foreach($_SESSION['cart'] as $data){
-										$pid = $data['id'];
-										$pName = $data['name'];
-										$pPrice = $data['price'];
-										$pQty = $data['qty'];
-										$query = $pdo -> prepare("insert into orders (p_id, p_name, p_qty,p_price, u_id, u_name, u_email) values (:pid,:pname,:pqty,:pprice,:uid,:uname,:uemail)");
-									$query->bindParam(':pid',$pid);
-									$query->bindParam(':pname',$pName);
-									$query->bindParam(':pqty',$pQty);
-									$query->bindParam(':pprice',$pPrice);
-									$query->bindParam(':uid',$uid);
-									$query->bindParam(':uname',uName);
-									$query->bindParam(':uemail',uEmail);
-									$query->execute();
-									}
-									
-									unset($_SESSION['cart']);
-									
-
-								}
-						
-						?>
+					
 						<?php
 						if(isset($_SESSION['useremail'])){
 

@@ -99,8 +99,6 @@ include('header.php');
 				$allCat = $query->fetchAll(PDO::FETCH_ASSOC);
 				//  print_r($allCat);
 				foreach($allCat as $cat){
-
-				
 				?>
 				<div class="col-md-6 col-xl-4 p-b-30 m-lr-auto">
 					<!-- Block1 -->
