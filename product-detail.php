@@ -136,7 +136,7 @@ include "header.php";
 
 							<div class="flex-w flex-r-m p-b-10">
 								<div class="size-204 flex-w flex-m respon6-next">
-								<form action="shoping-cart.php" method="post">
+								<form action="shoping-cart" method="post">
 									<input type="hidden" name="pid" value="<?php echo $proData['id'] ?>">
 									<input type="hidden" name="pName" value="<?php echo $proData['name'] ?>">
 									<input type="hidden" name="pDes" value="<?php echo $proData['description'] ?>">
@@ -429,7 +429,17 @@ include "header.php";
 			</div>
 		</div>
 	</section>
-		
+<script>
+	// Get the current URL without parameters
+	rvar baseUrl = window.location.origin + window.location.pathname;
+
+	// Construct the new URL with the pid parameter
+	//var newUrl = baseUrl ; // Replace '2' with the actual pid value
+
+	// Use history.pushState() to replace the current URL with the new URL
+	histoy.pushState({}, document.title, baseUrl);
+
+</script>
 
 	<?php
 	include "footer.php";

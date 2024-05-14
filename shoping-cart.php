@@ -10,10 +10,19 @@ if(isset($_POST['addToCart'])){
 		if(in_array($_POST['pid'],$id)){
 			echo "<script>alert('Cart is already added')</script>";
 		} else{
-		$count = count($_SESSION['cart']);
-		$_SESSION['cart'][$count]= array("id"=>$_POST['pid'], "name"=>$_POST['pName'], "qty"=>$_POST['num-product'], "description"=>$_POST['pDes'], "price"=>$_POST['pPrice'],"image"=>$_POST['pImage']);
-		echo "<script>alert('Cart added')</script>";
-		}
+			$query = $pdo->query("select quantity from products");
+			$products = $query->fetch(PDO::FETCH_ASSOC);
+				if($_POST['num-product']< $products){
+					echo "<script>alert('Selected item is out of stock');
+					location.assign('product-detail.php?pid=".$_POST['pid']."')</script>";
+				} else{
+					$count = count($_SESSION['cart']);
+					$_SESSION['cart'][$count]= array("id"=>$_POST['pid'], "name"=>$_POST['pName'], "qty"=>$_POST['num-product'], "description"=>$_POST['pDes'], "price"=>$_POST['pPrice'],"image"=>$_POST['pImage']);
+					echo "<script>alert('Cart added')</script>";
+			
+				}
+			}
+		
 	}else{
 		$_SESSION['cart'][0] = array("id"=>$_POST['pid'], "name"=>$_POST['pName'], "qty"=>$_POST['num-product'], "description"=>$_POST['pDes'], "price"=>$_POST['pPrice'],"image"=>$_POST['pImage']);
 		echo "<script>alert('Cart added')</script>";

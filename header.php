@@ -5,7 +5,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 <!--===============================================================================================-->	
-	<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> <!-- Include jQuery library -->
+
+<link rel="icon" type="image/png" href="images/icons/favicon.png"/>
 <!--===============================================================================================-->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
 <!--===============================================================================================-->
@@ -78,7 +80,7 @@
 
 					<!-- Menu desktop -->
 					<div class="menu-desktop">
-						<ul class="main-menu">
+						<ul class="main-menu" id="activemenu">
 							<li class="active-menu">
 								<a href="index.php">Home</a>
 								<!-- <ul class="sub-menu">
@@ -347,3 +349,23 @@
 			</div>
 		</div>
 	</div>
+<script>
+	$(document).ready(function(){
+		
+			let navbar = window.location.href;
+		console.log(navbar);
+		let sp = navbar.split('/');
+		let aa = sp[sp.legth];
+		let filename = aa.split('.');
+		let finalfile = filename[0];
+		let menu = $('#activemenu');
+		
+		if(finalfile== menu){
+			menu.addclass("active-menu");
+		}
+		// $('#' + finalfile).addClass("active-menu");
+		// finalfile.style.color = 'red';
+
+		
+	})
+</script>
