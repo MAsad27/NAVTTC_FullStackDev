@@ -7,15 +7,21 @@ include "header.php";
 if(isset($_POST['addToCart'])){
 	if($_SESSION['cart']){
 		$id= array_column($_SESSION['cart'],'id');
+		// print_r($id);
+		// print_r($_POST['pid']);
 		if(in_array($_POST['pid'],$id)){
 			echo "<script>alert('Cart is already added')</script>";
 		} else{
-			$query = $pdo->query("select quantity from products");
-			$products = $query->fetch(PDO::FETCH_ASSOC);
-				if($_POST['num-product']< $products){
+			
+			$query = $pdo->prepare("select quantity from products where id = :qid");
+			$query->bindParam(':qid', $id);
+			$query->execute();
+			$qty = $query->fetch(PDO::FETCH_ASSOC);
+			console.log($qty);
+				if($_POST['num-product']< $qty){
 					echo "<script>alert('Selected item is out of stock');
 					location.assign('product-detail.php?pid=".$_POST['pid']."')</script>";
-				} else{
+				
 					$count = count($_SESSION['cart']);
 					$_SESSION['cart'][$count]= array("id"=>$_POST['pid'], "name"=>$_POST['pName'], "qty"=>$_POST['num-product'], "description"=>$_POST['pDes'], "price"=>$_POST['pPrice'],"image"=>$_POST['pImage']);
 					echo "<script>alert('Cart added')</script>";

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 11, 2024 at 01:10 PM
+-- Generation Time: May 15, 2024 at 10:57 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -63,9 +63,24 @@ CREATE TABLE `orders` (
   `u_id` int(11) NOT NULL,
   `u_name` varchar(200) NOT NULL,
   `u_email` varchar(200) NOT NULL,
-  `status` varchar(200) DEFAULT NULL,
-  `dateTime` date DEFAULT NULL
+  `status` varchar(200) DEFAULT 'pending',
+  `dateTime` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `orders`
+--
+
+INSERT INTO `orders` (`id`, `p_id`, `p_name`, `p_qty`, `p_price`, `u_id`, `u_name`, `u_email`, `status`, `dateTime`) VALUES
+(1, 2, 'Gaon', 2, 5000, 12, 'kashif', 'kashi@gmail.com', NULL, NULL),
+(2, 6, 'Hand Carry', 3, 12345, 12, 'kashif', 'kashi@gmail.com', NULL, NULL),
+(3, 3, 'Techno', 4, 45000, 12, 'kashif', 'kashi@gmail.com', NULL, NULL),
+(4, 6, 'Hand Carry', 3, 12345, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-13 11:59:47'),
+(5, 5, 'Hand Bag', 2, 5000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-13 12:00:57'),
+(6, 3, 'Techno', 3, 45000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-13 12:00:57'),
+(7, 7, 'Hand Bag', 2, 45678, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-14 08:09:24'),
+(8, 2, 'Gaon', 23, 5000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-14 08:09:24'),
+(9, 3, 'Techno', 1, 45000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-14 08:09:24');
 
 -- --------------------------------------------------------
 
@@ -88,10 +103,11 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `quantity`, `image`, `catid`) VALUES
-(2, 'Gaon', 'ASD', 5000, 2, 'Screenshot 2024-02-29 174953.png', 13),
-(3, 'Techno', 'Mob', 45000, 1, 'Mob.jpg', 14),
-(5, 'Hand Bag', 'asd', 5000, 2, 'images.jfif', 1),
-(6, 'Hand Carry', 'bag', 12345, 1, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1);
+(2, 'Gaon', 'ASD', 5000, 0, 'Screenshot 2024-02-29 174953.png', 13),
+(3, 'Techno', 'Mob', 45000, 30, 'Mob.jpg', 14),
+(5, 'Hand Bag', 'asd', 5000, 1, 'images.jfif', 1),
+(6, 'Hand Carry', 'bag', 12345, 42, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1),
+(7, 'Hand Bag', 'asdf', 45678, 0, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1);
 
 -- --------------------------------------------------------
 
@@ -151,7 +167,8 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `roleid`) VALUES
 (12, 'kashif', 'kashi@gmail.com', '95938f7d0a9581a694282ebac1c4c49e0e19c1cd', 2),
 (13, 'ahmad', 'ahamd@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2),
 (14, 'asad', 'asad@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1),
-(15, 'Admin', 'admin', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2);
+(15, 'Admin', 'admin', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2),
+(16, 'hasan', 'hasan', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2);
 
 --
 -- Indexes for dumped tables
@@ -204,13 +221,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `students`
@@ -222,7 +239,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- Constraints for dumped tables
