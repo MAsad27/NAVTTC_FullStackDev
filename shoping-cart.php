@@ -5,42 +5,40 @@ include "header.php";
 
 <?php
 if(isset($_POST['addToCart'])){
-	if($_SESSION['cart']){
-		$id= array_column($_SESSION['cart'],'id');
-		// print_r($id);
-		// print_r($_POST['pid']);
-		if(in_array($_POST['pid'],$id)){
-			echo "<script>alert('Cart is already added')</script>";
-		} else{
-			
-			$query = $pdo->prepare("select quantity from products where id = :qid");
-			$query->bindParam(':qid', $id);
-			$query->execute();
-			$qty = $query->fetch(PDO::FETCH_ASSOC);
-			console.log($qty);
-				if($_POST['num-product']< $qty){
-					echo "<script>alert('Selected item is out of stock');
-					location.assign('product-detail.php?pid=".$_POST['pid']."')</script>";
-				
+	$product_id = $_POST['pid'];
+	$requestQty = $_POST['num-product'];
+	$query = $pdo->prepare("select quantity from products where id = :qid");
+	$query->bindParam(':qid', $product_id);
+	$query->execute();
+	$qty = $query->fetch(PDO::FETCH_ASSOC);
+	print_r($qty);
+
+	if($qty['quantity']>=$requestQty){
+
+		if($_SESSION['cart']){
+
+			$id= array_column($_SESSION['cart'],'id');
+			$cartID = in_array($_POST['pid'],$id);
+			if($cartID){
+				echo "<script>alert('Cart is already added')</script>";
+			}else{				
 					$count = count($_SESSION['cart']);
 					$_SESSION['cart'][$count]= array("id"=>$_POST['pid'], "name"=>$_POST['pName'], "qty"=>$_POST['num-product'], "description"=>$_POST['pDes'], "price"=>$_POST['pPrice'],"image"=>$_POST['pImage']);
 					echo "<script>alert('Cart added')</script>";
-			
 				}
-			}
-		
+		}else{
+			$_SESSION['cart'][0] = array("id"=>$_POST['pid'], "name"=>$_POST['pName'], "qty"=>$_POST['num-product'], "description"=>$_POST['pDes'], "price"=>$_POST['pPrice'],"image"=>$_POST['pImage']);
+			echo "<script>alert('Cart added')</script>";
+		}
 	}else{
-		$_SESSION['cart'][0] = array("id"=>$_POST['pid'], "name"=>$_POST['pName'], "qty"=>$_POST['num-product'], "description"=>$_POST['pDes'], "price"=>$_POST['pPrice'],"image"=>$_POST['pImage']);
-		echo "<script>alert('Cart added')</script>";
+		echo "<script>alert('Selected item is out of stock');
+		location.assign('product-detail?pid=".$product_id."')</script>";
 	}
 }
+
 if(isset($_GET['unset'])){
 	unset($_SESSION['cart']);
 }
-
-
-
-
 
 if(isset($_GET['checkout'])){						
 			$uid = $_SESSION['userid'];
