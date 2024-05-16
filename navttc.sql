@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 15, 2024 at 10:57 AM
+-- Generation Time: May 16, 2024 at 01:34 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 8.1.6
 
@@ -80,7 +80,9 @@ INSERT INTO `orders` (`id`, `p_id`, `p_name`, `p_qty`, `p_price`, `u_id`, `u_nam
 (6, 3, 'Techno', 3, 45000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-13 12:00:57'),
 (7, 7, 'Hand Bag', 2, 45678, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-14 08:09:24'),
 (8, 2, 'Gaon', 23, 5000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-14 08:09:24'),
-(9, 3, 'Techno', 1, 45000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-14 08:09:24');
+(9, 3, 'Techno', 1, 45000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-14 08:09:24'),
+(10, 7, 'Hand Bag', 4, 45678, 15, 'Admin', 'admin', 'pending', '2024-05-15 10:14:31'),
+(11, 3, 'Techno', 30, 45000, 15, 'Admin', 'admin', 'pending', '2024-05-15 10:14:31');
 
 -- --------------------------------------------------------
 
@@ -95,19 +97,43 @@ CREATE TABLE `products` (
   `price` int(11) NOT NULL,
   `quantity` int(11) NOT NULL,
   `image` varchar(500) NOT NULL,
-  `catid` int(11) NOT NULL
+  `catid` int(11) NOT NULL,
+  `procid` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `name`, `description`, `price`, `quantity`, `image`, `catid`) VALUES
-(2, 'Gaon', 'ASD', 5000, 0, 'Screenshot 2024-02-29 174953.png', 13),
-(3, 'Techno', 'Mob', 45000, 30, 'Mob.jpg', 14),
-(5, 'Hand Bag', 'asd', 5000, 1, 'images.jfif', 1),
-(6, 'Hand Carry', 'bag', 12345, 42, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1),
-(7, 'Hand Bag', 'asdf', 45678, 0, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1);
+INSERT INTO `products` (`id`, `name`, `description`, `price`, `quantity`, `image`, `catid`, `procid`) VALUES
+(2, 'Gaon', 'ASD', 5000, 2, 'Screenshot 2024-02-29 174953.png', 13, NULL),
+(3, 'Techno', 'Mob', 45000, 5, 'Mob.jpg', 14, NULL),
+(5, 'Hand Bag', 'asd', 5000, 1, 'images.jfif', 1, NULL),
+(6, 'Hand Carry', 'bag', 12345, 42, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1, NULL),
+(7, 'abc', 'asdf', 45678, 4, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1, NULL),
+(8, 'Phone', 'dhkj', 50000, 2, '', 14, 'PR-94fd5f49-136f-11ef-9c61-90b11c60f675'),
+(9, 'Mouse', 'Input device', 500, 1, '123', 2, 'PR-b2524e23-1371-11ef-9c61-90b11c60f675'),
+(10, 'Keyboard', 'Input Device', 1000, 1, 'download (1).jfif', 2, 'PR-259641ce-1372-11ef-9c61-90b11c60f675');
+
+--
+-- Triggers `products`
+--
+DELIMITER $$
+CREATE TRIGGER `ProductID` BEFORE INSERT ON `products` FOR EACH ROW BEGIN
+    IF NEW.procid IS NULL THEN
+        SET NEW.procid = CONCAT('PR-', UUID());
+    END IF;
+END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `test` BEFORE INSERT ON `products` FOR EACH ROW BEGIN
+    IF NEW.procid IS NULL THEN
+        SET NEW.procid = CONCAT('PR-', UUID());
+    END IF;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -221,13 +247,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `students`
