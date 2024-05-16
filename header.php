@@ -297,8 +297,14 @@
 						<div class="header-cart-item-txt p-t-8">
 							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
 								<?php 
-								
+								if(isset($_SESSION['cart'])){
+									foreach($_SESSION['cart'] as $value){
+										$totalprice = $value['qty'] * $value['price'];
+									}}
 								?>
+								<span class="header-cart-item-info">
+								1 x $19.00
+							</span>
 							</a>
 
 							<span class="header-cart-item-info">
@@ -359,22 +365,32 @@
 		</div>
 	</div>
 <script>
-	$(document).ready(function(){
-		
-			let navbar = window.location.href;
-		console.log(navbar);
-		let sp = navbar.split('/');
-		let aa = sp[sp.legth];
-		let filename = aa.split('.');
-		let finalfile = filename[0];
-		let menu = $('#activemenu');
-		
-		if(finalfile== menu){
-			menu.addclass("active-menu");
-		}
-		// $('#' + finalfile).addClass("active-menu");
-		// finalfile.style.color = 'red';
+	$(document).ready(function() {
+    // Get the current page URL
+    let navbar = window.location.href;
+    // console.log(navbar);
 
-		
-	})
+    // Split the URL to get the current file name
+    let sp = navbar.split('/');
+    let filename = sp[sp.length - 1].split('.')[0];
+    // console.log(filename);
+
+    // Find the matching menu item and add the "active-menu" class
+    $('#activemenu li').each(function() {
+        let menuItem = $(this).find('a').attr('href');
+        if (menuItem === filename) {
+            $(this).addClass('active-menu');
+        } else {
+            $(this).removeClass('active-menu');
+        }
+    });
+
+    // Add click event listener to toggle the "active-menu" class
+    $('#activemenu li a').on('click', function() {
+        $('#activemenu li').removeClass('active-menu');
+        $(this).parent().addClass('active-menu');
+    });
+});
+
 </script>
+
