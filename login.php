@@ -1,6 +1,9 @@
 <?php
 include_once "query.php";
 include_once "header.php";
+if(isset($_SESSION['useremail'])){
+    echo "<script>location.assign('index')</script>";
+}
 ?>
 
 <div class="container p-5 mt-5">

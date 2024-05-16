@@ -12,25 +12,19 @@ include "header.php";
 						All Products
 					</button>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".women">
-						Women
-					</button>
+					<?php
+					$query= $pdo->query("select * from categories");
+					$allCat = $query->fetchAll(PDO::FETCH_ASSOC);
+					// print_r($allCat);
+					foreach($allCat as $cat){
+					?>
 
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".men">
-						Men
+					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".<?php echo $cat['id']?>">
+						<?php echo $cat['Name'] ?>
 					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".bag">
-						Bag
-					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".shoes">
-						Shoes
-					</button>
-
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".watches">
-						Watches
-					</button>
+					<?php
+					}
+					?>
 				</div>
 
 				<div class="flex-w flex-c-m m-tb-10">

@@ -82,7 +82,7 @@
 					<div class="menu-desktop">
 						<ul class="main-menu" id="activemenu">
 							<li class="active-menu">
-								<a href="index.php">Home</a>
+								<a href="index">Home</a>
 								<!-- <ul class="sub-menu">
 									<li><a href="index.php">Homepage 1</a></li>
 									<li><a href="home-02.php">Homepage 2</a></li>
@@ -91,39 +91,39 @@
 							</li>
 
 							<li>
-								<a href="product.php">Shop</a>
+								<a href="product">Shop</a>
 							</li>
 
 							<li class="label1" data-label1="hot">
-								<a href="shoping-cart.php">Features</a>
+								<a href="shoping-cart">Features</a>
 							</li>
 
 							<li>
-								<a href="blog.php">Blog</a>
+								<a href="blog">Blog</a>
 							</li>
 
 							<li>
-								<a href="about.php">About</a>
+								<a href="about">About</a>
 							</li>
 
 							<li>
-								<a href="contact.php">Contact</a>
+								<a href="contact">Contact</a>
 							</li>
 							<?php
 							if(isset($_SESSION['useremail'])){
 								
 							?>	
 								<li>
-								<a href="logout.php">Logout</a>
+								<a href="logout">Logout</a>
 								</li>
 							<?php
 							}else{
 							?>
 							<li>
-								<a href="signup.php">Sign Up</a>
+								<a href="signup">Sign Up</a>
 							</li>
 							<li>
-								<a href="login.php">Login</a>
+								<a href="login">Login</a>
 							</li>
 							<?php
 							}
