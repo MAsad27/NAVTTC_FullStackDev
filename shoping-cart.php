@@ -12,7 +12,7 @@ if(isset($_POST['addToCart'])){
 		} else{
 			$query = $pdo->query("select quantity from products");
 			$products = $query->fetch(PDO::FETCH_ASSOC);
-				if($_POST['num-product']< $products){
+				if($_POST['num-product']<= $products){
 					echo "<script>alert('Selected item is out of stock');
 					location.assign('product-detail.php?pid=".$_POST['pid']."')</script>";
 				} else{

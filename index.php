@@ -431,6 +431,8 @@ include('header.php');
 		</div>
 	</section>
 
+
+</script>
 <?php
 include('footer.php');
 ?>
