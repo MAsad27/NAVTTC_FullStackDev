@@ -37,6 +37,79 @@
 	<link rel="stylesheet" type="text/css" href="css/main.css">
 <!--===============================================================================================-->
 </head>
+<?php
+if(isset($_POST['addToCart'])){
+	$product_id = $_POST['pid'];
+	$requestQty = $_POST['num-product'];
+	$query = $pdo->prepare("select quantity from products where id = :qid");
+	$query->bindParam(':qid', $product_id);
+	$query->execute();
+	$qty = $query->fetch(PDO::FETCH_ASSOC);
+	// print_r($qty);
+
+	if($qty['quantity']>=$requestQty){
+
+		if($_SESSION['cart']){
+
+			$id= array_column($_SESSION['cart'],'id');
+			$cartID = in_array($_POST['pid'],$id);
+			if($cartID){
+				echo "<script>alert('Cart is already added')</script>";
+			}else{				
+					$count = count($_SESSION['cart']);
+					$_SESSION['cart'][$count]= array("id"=>$_POST['pid'], "name"=>$_POST['pName'], "qty"=>$_POST['num-product'], "description"=>$_POST['pDes'], "price"=>$_POST['pPrice'],"image"=>$_POST['pImage']);
+					echo "<script>alert('Cart added')</script>";
+				}
+		}else{
+			$_SESSION['cart'][0] = array("id"=>$_POST['pid'], "name"=>$_POST['pName'], "qty"=>$_POST['num-product'], "description"=>$_POST['pDes'], "price"=>$_POST['pPrice'],"image"=>$_POST['pImage']);
+			echo "<script>alert('Cart added')</script>";
+		}
+	}else{
+		echo "<script>alert('Selected item is out of stock');
+		location.assign('product-detail?pid=".$product_id."')</script>";
+	}
+}
+
+if(isset($_GET['unset'])){
+	unset($_SESSION['cart']);
+}
+
+if(isset($_GET['checkout'])){						
+			$uid = $_SESSION['userid'];
+			$uEmail = $_SESSION['useremail'];
+			$uName = $_SESSION['username'];
+			// print_r($uName);
+			if(isset($_SESSION['cart'])){
+				if(count($_SESSION['cart'])>0){
+			foreach($_SESSION['cart'] as $key=>$value){
+				$pid = $value['id'];
+				$pName = $value['name'];
+				$pPrice = $value['price'];
+				$pQty = $value['qty'];
+				$query = $pdo -> prepare("insert into orders (p_id, p_name, p_qty,p_price, u_id, u_name, u_email) values (:pid,:pname,:pqty,:pprice,:uid,:uname,:uemail)");
+			$query->bindParam(':pid',$pid);
+			$query->bindParam(':pname',$pName);
+			$query->bindParam(':pqty',$pQty);
+			$query->bindParam(':pprice',$pPrice);
+			$query->bindParam(':uid',$uid);
+			$query->bindParam(':uname',$uName);
+			$query->bindParam(':uemail',$uEmail);
+			$query->execute();
+
+			$update = $pdo->prepare("UPDATE products SET quantity = quantity - :orderedQty where id = :productId");
+			$update->bindParam('orderedQty', $pQty);
+			$update->bindParam('productId', $pid);
+			$update->execute();
+			echo "<script>alert('order placed successfully')</script>";
+			}
+		}
+
+	}
+	unset($_SESSION['cart']);
+
+}
+
+?>
 <body class="animsition">
 	
 	<!-- Header -->
@@ -141,7 +214,7 @@
 						<?php
 						$count = 0;
 						if(isset($_SESSION['cart'])){
-							$count = $count($_SESSION['cart']);
+							$count = count($_SESSION['cart']);
 							
 						}
 						?>
@@ -289,61 +362,37 @@
 			
 			<div class="header-cart-content flex-w js-pscroll">
 				<ul class="header-cart-wrapitem w-full">
+				<?php 
+					if(isset($_SESSION['cart'])){
+					foreach($_SESSION['cart'] as $value){
+						$totalprice = $value['qty'] * $value['price'];
+						echo $totalprice;
+					?>	
+
+				
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="images/item-cart-01.jpg" alt="IMG">
+							<img src="<?php echo $value['image']?>"  alt="<?php echo $value['name']?>" >
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
 							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								<?php 
-								if(isset($_SESSION['cart'])){
-									foreach($_SESSION['cart'] as $value){
-										$totalprice = $value['qty'] * $value['price'];
-									}}
-								?>
+								
 								<span class="header-cart-item-info">
+								<?php echo $value['qty']?>
 								1 x $19.00
 							</span>
 							</a>
+							
 
 							<span class="header-cart-item-info">
 								1 x $19.00
 							</span>
 						</div>
 					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-02.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Converse All Star
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $39.00
-							</span>
-						</div>
-					</li>
-
-					<li class="header-cart-item flex-w flex-t m-b-12">
-						<div class="header-cart-item-img">
-							<img src="images/item-cart-03.jpg" alt="IMG">
-						</div>
-
-						<div class="header-cart-item-txt p-t-8">
-							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
-								Nixon Porter Leather
-							</a>
-
-							<span class="header-cart-item-info">
-								1 x $17.00
-							</span>
-						</div>
-					</li>
+					<?php
+					}}
+					?>
 				</ul>
 				
 				<div class="w-full">

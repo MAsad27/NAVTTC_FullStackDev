@@ -11,7 +11,7 @@ if(isset($_POST['addToCart'])){
 	$query->bindParam(':qid', $product_id);
 	$query->execute();
 	$qty = $query->fetch(PDO::FETCH_ASSOC);
-	print_r($qty);
+	// print_r($qty);
 
 	if($qty['quantity']>=$requestQty){
 
@@ -24,7 +24,7 @@ if(isset($_POST['addToCart'])){
 			}else{				
 					$count = count($_SESSION['cart']);
 					$_SESSION['cart'][$count]= array("id"=>$_POST['pid'], "name"=>$_POST['pName'], "qty"=>$_POST['num-product'], "description"=>$_POST['pDes'], "price"=>$_POST['pPrice'],"image"=>$_POST['pImage']);
-					echo "<script>alert('Cart added')</script>";
+					echo "<script>alert('Cart added') location.assign('product-detail?pid=".$product_id."')</script>";
 				}
 		}else{
 			$_SESSION['cart'][0] = array("id"=>$_POST['pid'], "name"=>$_POST['pName'], "qty"=>$_POST['num-product'], "description"=>$_POST['pDes'], "price"=>$_POST['pPrice'],"image"=>$_POST['pImage']);
@@ -44,7 +44,7 @@ if(isset($_GET['checkout'])){
 			$uid = $_SESSION['userid'];
 			$uEmail = $_SESSION['useremail'];
 			$uName = $_SESSION['username'];
-			print_r($uName);
+			// print_r($uName);
 			if(isset($_SESSION['cart'])){
 				if(count($_SESSION['cart'])>0){
 			foreach($_SESSION['cart'] as $key=>$value){
@@ -263,30 +263,27 @@ if(isset($_GET['checkout'])){
 								</span>
 							</div>
 						</div>
-					
 						<?php
 						if(isset($_SESSION['useremail'])){
+							if(isset($_SESSION['cart'])){
+						?>
+						<a href="?checkout" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">Proceed to Checkout</a>
 
-							?>
-
-						<a href="?checkout"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-							Proceed to Checkout
-						</a>
                         <?php
+						}else{
+						?>
+						<a href="?checkout" style="pointer-events: none; cursor: default;" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">Proceed to Checkout</a>
+						<?php
+						}
 						}
 						else{
 						?>
-
-						<a href="login.php"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">
-							Proceed to Checkout
-						</a>
-
+						<a href="login.php"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">Proceed to Checkout</a>
 						<?php
 						}
 						?>
 						<br>
 						<a class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" name="" href="?unset" >Clear Cart</a>
-						
 					</div>
 				</div>
 			</div>
