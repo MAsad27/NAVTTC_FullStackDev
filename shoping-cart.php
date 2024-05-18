@@ -15,7 +15,7 @@ if(isset($_POST['addToCart'])){
 
 	if($qty['quantity']>=$requestQty){
 
-		if($_SESSION['cart']){
+		if(isset($_SESSION['cart'])){
 
 			$id= array_column($_SESSION['cart'],'id');
 			$cartID = in_array($_POST['pid'],$id);
@@ -26,7 +26,8 @@ if(isset($_POST['addToCart'])){
 					$_SESSION['cart'][$count]= array("id"=>$_POST['pid'], "name"=>$_POST['pName'], "qty"=>$_POST['num-product'], "description"=>$_POST['pDes'], "price"=>$_POST['pPrice'],"image"=>$_POST['pImage']);
 					echo "<script>alert('Cart added') location.assign('product-detail?pid=".$product_id."')</script>";
 				}
-		}else{
+		}
+		else{
 			$_SESSION['cart'][0] = array("id"=>$_POST['pid'], "name"=>$_POST['pName'], "qty"=>$_POST['num-product'], "description"=>$_POST['pDes'], "price"=>$_POST['pPrice'],"image"=>$_POST['pImage']);
 			echo "<script>alert('Cart added')</script>";
 		}
@@ -70,24 +71,31 @@ if(isset($_GET['checkout'])){
 			
 			// error_reporting(E_ALL);
 			// ini_set('display_errors', 1);
-
-				$insertInvoice = $pdo->prepare("insert into invoices (u_id, u_name, u_email, p_id, p_name, p_price, p_qty) values (:userid, :username,:useremail,:proid, :proname, :proprice, :proqty)");
-				$insertInvoice->bindParam(':userid', $uid);
-				$insertInvoice->bindParam(':username', $uName);
-				$insertInvoice->bindParam(':useremail', $uEmail);
-				$insertInvoice->bindParam(':proid', $pid);
-				$insertInvoice->bindParam(':proname', $pName);
-				$insertInvoice->bindParam(':proprice', $pPrice);
-				$insertInvoice->bindParam(':proqty', $pQty);
-				$insertInvoice->execute();
-				echo "<script>alert('invoice Added')</script>";
-				
 			}
 		}
-
+		$totalPrice = 0 ;
+		$totalQty = 0 ;
+			foreach($_SESSION['cart'] as $sTotal){
+				$subtotal = $sTotal['qty'] * $sTotal['price'];
+				$totalPrice += $subtotal;
+				$totalQty += $sTotal['qty'];
+				print_r($totalQty);
+				print_r($totalPrice);
+			}
+			
+		$insertInvoice = $pdo->prepare("insert into invoices (u_id, u_name, u_email, p_id, p_name, p_price, p_qty) values (:userid, :username, :useremail,:proid, :proname, :proprice, :proqty)");
+		$insertInvoice->bindParam(':userid', $uid);
+		$insertInvoice->bindParam(':username', $uName);
+		$insertInvoice->bindParam(':useremail', $uEmail);
+		$insertInvoice->bindParam(':proid', $pid);
+		$insertInvoice->bindParam(':proname', $pName);
+		$insertInvoice->bindParam(':proprice', $pPrice);
+		$insertInvoice->bindParam(':proqty', $pQty);
+		 $insertInvoice->execute();
+	
+		echo "<script>alert('invoice Added')</script>";
 	}
 	unset($_SESSION['cart']);
-
 }
 
 ?>
