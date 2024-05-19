@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1></h1>
+</body>
+
+<script>
+    
+        let std = [
+            ["Asad", 24, "Multan", "Ali"],
+            ["Aqsa", 23, "Mlt"],
+            ["Ali", 21],
+            ["Usama", 33, "Lahore"]
+        ];
+        
+        let lbl = document.querySelector('h1');
+
+    for(i=0; i<std.length ; i++){
+        for(j=0; j<std[i].length; j++){
+            lbl.innerHTML += std[i][j] + " ";
+            
+        }
+        lbl.innerHTML += "<br>";
+        
+    }
+    
+</script>
+
+</html>

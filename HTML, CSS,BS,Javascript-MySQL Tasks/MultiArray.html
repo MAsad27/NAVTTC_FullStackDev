@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1></h1>
+    
+    <table border="1" id="tbl" style="border-collapse: collapse;">
+        <thead>
+            <th>Name</th>
+            <th>Age</th>
+            <th>City</th>
+            <th>Email</th>
+        </thead>
+        <tbody id="tbody">
+            
+
+        </tbody>
+    </table>
+</body>
+
+<script>
+    
+        let std = [
+            ["Asad", 24, "Multan", "Ali"],
+            ["Aqsa", 23, "Mlt"],
+            ["Ali", 21],
+            ["Usama", 33, "Lahore"]
+        ];
+        
+        let tbldata = document.querySelector('#tbody')
+        let empvar= "";
+
+        for(i=0; i<std.length; i++){
+            empvar += `<tr>`;
+            for(j=0; j<std[i].length; j++){
+                empvar += `<td>`+std[i][j]+`</td>`;
+
+            }
+            empvar += `</tr>`;
+        }
+        tbldata.innerHTML = empvar;
+
+
+    // for(i=0; i<std.length ; i++){
+    //     for(j=0; j<std[i].length; j++){
+    //         lbl.innerHTML += std[i][j] + " ";
+            
+    //     }
+    //     lbl.innerHTML += "<br>";
+        
+    // }
+    
+</script>
+
+</html>

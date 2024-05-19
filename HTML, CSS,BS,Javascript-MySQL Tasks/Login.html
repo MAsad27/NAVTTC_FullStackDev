@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Registration form</h1>
+    <input type="text" id="name" placeholder="Enter your Name">    
+    <input type="text" id="Pass" placeholder="Enter your Password">
+    <button id="btn" onclick="userreg()">Login</button>
+<br><br><br><br>
+<h1>Registration form</h1>
+    <input type="text" id="uname" placeholder="Enter your Name">    
+    <input type="text" id="uPass" placeholder="Enter your Password">
+    <button id="btn" onclick="ulogin()">Login</button>
+
+    <h2></h2>
+<script>
+
+    let userdata =[];
+    let userreg = ()=>{
+        let uname = document.querySelector('#name').value;
+        let pass= document.querySelector('#Pass').value;
+        userdata.push({Username:uname, Password:pass});
+        localStorage.setItem('objdata', JSON.stringify(userdata));
+    }
+
+    let ulogin =()=>{
+        let uname= document.querySelector('#uname').value;
+        let upass= document.querySelector('#uPass').value;
+
+        let stringdata = localStorage.getItem('objdata');
+        console.log(stringdata);
+
+        let aa = JSON.parse(localStorage.getItem('objdata'));
+console.log(aa);
+        let matched = aa.find(user=>{
+           return user.Username == uname && user.Password == upass; 
+        })
+        
+        if(matched){
+            document.querySelector('h2').innerHTML = "Welcome " +"" + uname;
+
+        }
+
+        else{
+            document.querySelector('h2').innerHTML = "Login or Password is incorrect";
+        }
+
+
+    }
+    
+
+</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    button{
+        width:100%;
+        height: 100%;
+        font-size: 20px;
+    }
+    tr{
+        height: 50px;
+    }
+    
+</style>
+<body>
+    <table border="2" style="width: 30%; height: 100%; ">
+        <tr>
+            <td colspan="5" ><input type="text" id="txt" placeholder="0" style="text-align: right; font-size: 20px; width: 97.7%; height: 50px;"> </td>
+            
+        </tr>
+        <tr>
+            <td><button onclick="fun(9)">9</button></td>
+            <td><button onclick="fun(8)">8</button></td>
+            <td><button onclick="fun(7)">7</button></td>
+            <td><button onclick="op('*')">*</button></td>
+            <td><button onclick="del('x')">Del</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="fun(6)">6</button></td>
+            <td><button onclick="fun(5)">5</button></td>
+            <td><button onclick="fun(4)">4</button></td>
+            <td><button onclick="op('+')">+</button></td>
+            <td><button onclick="Canc('')">C</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="fun(3)">3</button></td>
+            <td><button onclick="fun(2)">2</button></td>
+            <td><button onclick="fun(1)">1</button></td>
+            <td><button onclick="op('-')">-</button></td>
+        </tr>
+        <tr>
+            <td><button onclick="op('.')">.</button></td>
+            <td><button onclick="fun(0)">0</button></td>
+            <td colspan="2" onclick="sol('=')"><button>=</button></td>
+            
+        </tr>
+    </table>
+</body>
+
+<script>
+    
+    fun = (n)=>{
+        document.querySelector("#txt").value += n;
+    }
+    op=(oper) =>{
+        document.querySelector('#txt').value +=oper;
+    }
+
+    sol=()=>{
+        let result = eval(document.querySelector('#txt').value);
+        document.querySelector('#txt').value = result;
+    }
+    Canc = ()=>{
+        document.querySelector('#txt').value = "";
+        
+    }
+    del = () =>{
+        let inp =document.querySelector('#txt').value;
+        for(i=inp.length; i>0; i--){
+            
+
+        }
+    }
+    
+
+    
+</script>
+
+</html>

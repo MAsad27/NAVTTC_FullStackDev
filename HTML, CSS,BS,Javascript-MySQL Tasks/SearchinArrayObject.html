@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap-4.6.2-dist/css/bootstrap.min.css">
+</head>
+<style>
+    .row{
+    display: flex;
+    justify-content: space-evenly;
+}
+.d{
+    height: 250px;
+    width: 250px;
+    border-radius: 3px;
+    border: 1px solid rgb(179, 176, 176);
+    /* background-color: gray; */
+}
+
+
+.container h1{
+    width: 400px;
+   position: relative;
+   left: 50px;
+   
+}
+    .imgDiv{
+    height: 170px;
+}
+.imgDiv img{
+    height: 170px;
+}
+.content{
+    height: 60px;
+     position: relative;
+     top: 10px;
+}
+.content h3{
+    text-align: center;
+    position: relative;
+    top: -10px;
+    color: #233d7b;
+}
+p{
+    text-align: center;
+    position: relative;
+    top: -20%;
+    font: bolder;
+}
+input{
+    width: 20%;
+    
+}
+
+</style>
+<body>
+ <input type="text" id="srchtxt" onkeyup="srch()">
+ 
+<br><br>
+    <div class="container-fluid col-xl-12 col-lg-11  bg-primary" >
+        <div class="row" id="fncars"></div>
+
+    </div>
+    
+</body>
+<script>
+
+let obj =[
+    {cName: "Toyota Corolla", cPrice: 900000, cImage: "Images/car1.jpg" },
+    {cName: "Honda City", cPrice: 500000, cImage: "Images/car2.jpg" },
+    {cName: "Toyota Corolla", cPrice: 9600000, cImage: "Images/car3.png" },
+    {cName: "Mercedees", cPrice: 9100000, cImage: "Images/car4.jpg"}];
+    let row1 = document.querySelector("#fncars");
+    // searched data
+srch=()=>{
+
+    let col1 = "";
+    let inp = document.querySelector('#srchtxt').value;
+
+let match = obj.filter(val=>{
+    return val.cName == inp;
+})
+console.log(match);
+if(match.length>0){
+    for (i = 0; i < match.length; i++) {
+        col1 += `<div class="d col-md-3" >
+
+            <div class="imgDiv">
+                <img src="`+match[i].cImage+`" alt="">
+            </div>
+            <div class="content">
+                <h3>`+match[i].cName+`</h3>
+                <p>`+match[i].cPrice+` PKR </p>
+            </div>
+        </div>`
+}
+row1.innerHTML = col1;
+}
+else{
+    fun();
+}
+}
+function fun(){
+  
+    let col1 = "";
+
+    for (i = 0; i < obj.length; i++) {
+        col1 += `<div class="d">
+
+            <div class="imgDiv">
+                <img src="`+obj[i].cImage+`" alt="">
+            </div>
+            <div class="content">
+                <h3>`+obj[i].cName+`</h3>
+                <p>`+obj[i].cPrice+` PKR </p>
+            </div>
+        </div>`
+}
+row1.innerHTML = col1;
+}
+fun();
+
+</script>
+</html>

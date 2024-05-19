@@ -1,0 +1,39 @@
+{
+    "Student": [
+        {"id": 1, "Name": "Ali", "Dept": "IT Department", "img": "../Images/student.png"},
+        {"id": 2, "Name": "Asad", "Dept": "QA Department", "img": "../Images/student.png"},
+        {"id": 3, "Name": "Ahmad", "Dept": "QC Department", "img": "../Images/student.png"},
+        {"id": 4, "Name": "Aqsa", "Dept": "QA Department", "img": "../Images/student.png"},
+        {"id": 5, "Name": "Anas", "Dept": "IT Department", "img": "../Images/student.png"},
+        {"id": 6, "Name": "saba", "Dept": "IT Department", "img": "../Images/student.png"},
+        {"id": 7, "Name": "ashraf", "Dept": "QA Department", "img": "../Images/student.png"},
+        {"id": 8, "Name": "nimra", "Dept": "QC Department", "img": "../Images/student.png"},
+        {"id": 9, "Name": "iqra", "Dept": "QA Department", "img": "../Images/student.png"},
+        {"id": 10, "Name": "esha", "Dept": "IT Department", "img": "../Images/student.png"}
+                
+    ],
+    "Employee":[
+        {"id": 1, "Name": "Ali", "Dept": "IT Department", "img": "../Images/employee.png"},
+        {"id": 2, "Name": "Asad", "Dept": "QA Department", "img": "../Images/employee.png"},
+        {"id": 3, "Name": "Ahmad", "Dept": "QC Department", "img": "../Images/employee.png"},
+        {"id": 4, "Name": "Aqsa", "Dept": "QA Department", "img": "../Images/employee.png"},
+        {"id": 5, "Name": "Anas", "Dept": "IT Department", "img": "../Images/employee.png"},
+        {"id": 6, "Name": "saba", "Dept": "IT Department", "img": "../Images/employee.png"},
+        {"id": 7, "Name": "ashraf", "Dept": "QA Department", "img": "../Images/employee.png"},
+        {"id": 8, "Name": "nimra", "Dept": "QC Department", "img": "../Images/employee.png"},
+        {"id": 9, "Name": "iqra", "Dept": "QA Department", "img": "../Images/employee.png"},
+        {"id": 10, "Name": "esha", "Dept": "IT Department", "img": "../Images/employee.png"}
+    ],
+    "Management":[
+        {"id": 1, "Name": "Ali", "Dept": "IT Department", "img": "../Images/management.png"},
+        {"id": 2, "Name": "Asad", "Dept": "QA Department", "img": "../Images/management.png"},
+        {"id": 3, "Name": "Ahmad", "Dept": "QC Department", "img": "../Images/management.png"},
+        {"id": 4, "Name": "Aqsa", "Dept": "QA Department", "img": "../Images/management.png"},
+        {"id": 5, "Name": "Anas", "Dept": "IT Department", "img": "../Images/management.png"},
+        {"id": 6, "Name": "saba", "Dept": "IT Department", "img": "../Images/management.png"},
+        {"id": 7, "Name": "ashraf", "Dept": "QA Department", "img": "../Images/management.png"},
+        {"id": 8, "Name": "nimra", "Dept": "QC Department", "img": "../Images/management.png"},
+        {"id": 9, "Name": "iqra", "Dept": "QA Department", "img": "../Images/management.png"},
+        {"id": 10, "Name": "esha", "Dept": "IT Department", "img": "../Images/management.png"}
+    ]
+}

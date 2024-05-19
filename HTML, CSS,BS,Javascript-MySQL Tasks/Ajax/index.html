@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="bootstrap-4.6.2-dist/css/bootstrap.min.css">
+    <script src="jQuery/jquery-3.7.1.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row" id="fncars">
+<div class="col">
+    <div class="card">
+        <img class="card-img-top" src="holder.js/100x180/" alt="">
+        <div class="card-body">
+            <h4 class="card-title">Title</h4>
+            <p class="card-text">Text</p>
+        </div>
+    </div>
+</div>
+        </div>
+    </div>
+</body>
+<script>
+    $(document).ready(function(){
+        let fncar = $("#fncars");
+
+        $.ajax({
+            url: "Ajax\index.json",
+            method: 'get',
+            success
+
+        })
+
+
+    })
+</script>
+
+
+<script src="bootstrap-4.6.2-dist/js/bootstrap.min.js"></script>
+ 
+</html>

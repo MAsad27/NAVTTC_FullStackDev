@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1></h1>  
+<h2></h2>
+
+</body>
+<script>
+    let data = {Name:"Asad", Age:24, Email:"asadgmail"};
+    let keys = Object.keys(data);
+    console.log(keys);
+
+    for (i=0; i<keys.length; i++){
+        let h2data = document.querySelector('h1');
+        let print = document.querySelector('h2');
+        h2data.innerHTML += keys[i]+ `,`;
+        print.innerHTML += data[keys[i]]+ `,`;
+        // console.log(data[keys[i]]);
+
+    }
+
+    for (let aa in data){
+        console.log(data[aa]);
+    }
+</script>
+
+
+</html>

@@ -1,0 +1,92 @@
+<html lang="en"> 
+<head>
+
+</head>
+<body>
+    <div id="container">
+        <div>
+            <label>Urdu</label>
+            <input type="text" id="txturdu"  >
+        </div>
+        <div>
+            <label>English</label>
+            <input type="text" id="txtEng"  >
+        </div>
+        <div>
+            <label>Math</label>
+            <input type="text"  id="txtMath">
+        </div>
+        <div>
+            <label>Chemitry</label>
+            <input type="text" id="txtChe" >
+        </div>
+        <div>
+            <label>Physics</label>
+            <input type="text" id="txtphy"  >
+        </div>
+
+        <button onclick="fun()"> Submit 
+        </button>
+        <h1></h1>
+        <h2></h2>
+    </div>
+
+<script>
+
+let fun=()=> {
+    let aa = parseInt(document.querySelector('#txturdu').value);
+    let bb = parseInt(document.querySelector('#txtEng').value);
+    let cc = parseInt(document.querySelector('#txtMath').value);
+    let dd = parseInt(document.querySelector('#txtChe').value);
+    let ee = parseInt(document.querySelector('#txtphy').value);
+
+    let marks = aa + bb + cc+ dd+ ee;
+
+
+    //console.log(marks);
+
+    let perc = (marks/500)*100;
+    let printdata= document.querySelector('h1');
+    printdata.innerHTML= perc + '%';
+
+    if(perc >= 80 && perc<=100){
+
+        let printdata= document.querySelector('h2');
+        printdata.innerHTML += 'Your Grade is A+'';
+
+
+    }
+    if(perc >= 60 && perc<80){
+
+let printdata= document.querySelector('h2');
+printdata.innerHTML += 'Your Grade is 'A';
+
+
+}
+if(perc >= 80 && perc<=100){
+
+let printdata= document.querySelector('h2');
+printdata.innerHTML += 'Your Grade is A+'';
+
+
+}
+if(perc >= 80 && perc<=100){
+
+let printdata= document.querySelector('h2');
+printdata.innerHTML += 'Your Grade is A+'';
+
+
+}
+
+
+
+}
+
+    
+
+
+</script>
+
+</body>
+
+</html>

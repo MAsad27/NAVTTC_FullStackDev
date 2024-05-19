@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" id="name" placeholder="Enter your Name">    
+    <input type="text" id="age" placeholder="Enter your Age">
+    <button id="btn" onclick="clickme()">Submit</button>
+    <ol id="ols">
+        
+    </ol>
+<h1></h1>
+
+    <script>
+        clickme =()=>{
+        let uname= document.querySelector('#name').value;
+        let uage= document.getElementById('age').value;
+
+        localStorage.setItem('usname', uname);     
+        localStorage.setItem('usage', uage);
+        
+        let obj = {stdname: uname , stdage: uage};
+        localStorage.setItem('stdobj', JSON.stringify(obj));
+
+       
+       
+    //    dat.innerHTML = localStorage.getItem('stdobj');
+
+       let pars = JSON.parse(localStorage.getItem('stdobj'));
+       console.log(pars);
+
+       let dat = document.querySelector('h1');
+
+       for (let s in pars){
+        console.log(pars[s]);
+        dat.innerHTML +=  pars[s] + ", " ;
+
+
+
+       }
+
+
+        }
+       
+
+
+    </script>
+</body>
+
+</html>

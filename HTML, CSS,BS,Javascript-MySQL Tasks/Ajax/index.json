@@ -1,0 +1,14 @@
+{
+    "Employees": [
+        {"id":1, "P.No": 123, "Name": "Asad", "Department": "IT"},
+        {"id":2, "P.No": 124, "Name": "Shabi", "Department": "QA"},
+        {"id":3, "P.No": 125, "Name": "Ali", "Department": "QC"},
+        {"id":4, "P.No": 126, "Name": "Ahmad", "Department": "Network"},
+        {"id":5, "P.No": 127, "Name": "Aqsa", "Department": "Hardware"}
+        
+    ],
+    "Std": [
+        
+    ]
+
+}

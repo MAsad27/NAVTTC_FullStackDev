@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../bootstrap-4.6.2-dist/css/bootstrap.min.css">
+    <script src="../jQuery/jquery-3.7.1.min.js"></script>
+    
+</head>
+<body>
+    <div class="container">'
+        <select id="ddmain">
+            <!-- <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option> -->
+        </select>
+        <select id="data">
+            <!-- <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option> -->
+        </select>
+
+        <div class="container" id="cardsrow" style="display: none;">
+            <div class="card" style="width:400px">
+              <img class="card-img-top" src="" alt="Card image" style="width:100%">
+              <div class="card-body">
+                <h4 class="card-title" id="cardTitle"></h4>
+                <p class="card-text" id="cardDept"></p>
+              </div>
+            </div>
+          </div>
+        
+    </div>
+</body>
+<script>
+$(document).ready(function() {
+        $.getJSON("Ajax1.json", function(data) {
+            const objectKeys = Object.keys(data);
+
+            objectKeys.forEach(key => {
+            const option = $('<option>').val(key).text(key);
+            $('#ddmain').append(option);
+            });
+
+        $('#ddmain').change(function() {
+            const selectedObject = $(this).val();
+            $('#data').empty();
+            const selectedData = data[selectedObject];
+            
+            selectedData.forEach(item => {
+                const option = $('<option>').val(item.Name).text(item.Name);
+                $('#data').append(option);
+            });
+        });
+
+        $('#ddmain').trigger('change');
+        $('#data').change(function() {
+            const selectedName = $(this).val();
+            const selectedObject = $('#ddmain').val();
+            const selectedPerson = data[selectedObject].find(item => item.Name === selectedName);
+
+            if (selectedPerson) {
+                $('.card-img-top').attr('src', selectedPerson.img || '');
+                $('#cardTitle').text(selectedPerson.Name);
+                $('#cardDept').text(selectedPerson.Dept);
+                $('#cardsrow').show();
+            } else {
+                $('#cardsrow').hide();
+            }
+        });
+    });
+});
+
+    // $(document).ready(function(){
+    //     let row1 = $("#cardsrow");
+    //     let col1 = "";
+
+    //     $.ajax({
+    //         url: "../js/Ajax1.json",
+    //         method: "get",
+    //         success: function(data){
+    //             $.each(data.Std, function(k,v){
+    //                 col1 += `<div class="col-md-4">
+    //             <div class="card">
+    //                 <img class="card-img-top" src="`+v.img+`" alt="">
+    //                 <div class="card-body">
+    //                     <h4 class="card-title">`+v.Name+`</h4>
+    //                     <p class="card-text">`+v.Dept+`</p>
+    //                 </div>
+    //             </div>
+    //         </div>`
+
+    //             })
+    //             row1.html(col1);
+
+    //         }
+    //     })
+
+
+
+    // })
+
+</script>
+
+<script src="../bootstrap-4.6.2-dist/js/bootstrap.min.js"></script>
+ 
+</html>
+

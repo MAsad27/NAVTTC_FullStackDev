@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1></h1>
+    <input type="text", id="txt">
+    <button id="btn" onclick="func()">check</button>
+</body>
+<script>
+function func(){
+let printdata = document.querySelector('h1');
+let tex= document.querySelector('#txt').value;
+
+if(tex%2==0){
+    printdata.innerHTML = "Even numbers are:"
+
+    for (i=2;i<=tex ; i+=2){
+         printdata.innerHTML +=  i +",";
+    }
+}
+else if (tex%2!=0){
+    printdata.innerHTML = "Odd numbers are:"
+    for (j=1; j<tex; j=j+2){
+        printdata.innerHTML += j+ ",";
+    }
+}
+
+}
+</script>
+
+
+</html>

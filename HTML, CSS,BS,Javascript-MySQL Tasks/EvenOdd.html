@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1></h1>
+    <input type="text" id="txt">
+    <button id="evenbtn" onclick="evennum()">Check for Even or odd</button>
+    
+</body>
+<script>
+
+
+    function evennum(){
+        
+        let pdata= document.querySelector('h1');
+        let num= document.querySelector("#txt").value;
+        
+        for(i=0; i<10;i++){
+           if(num%2==0){
+            pdata.innerHTML = "No is Even";
+
+           }
+           else{
+            pdata.innerHTML = "No is odd";
+        }
+
+        }
+
+
+    }
+
+</script>
+
+
+</html>

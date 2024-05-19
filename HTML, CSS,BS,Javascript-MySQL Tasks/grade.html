@@ -1,0 +1,116 @@
+<html lang="en">
+<head>
+
+</head>
+<style>
+    #tbldiv{
+        display: none;
+        width:100%;
+    }
+</style>
+<body>
+    
+    <div>
+        <label>Name</label>
+        <input type="text" id="Name"  >
+    </div>
+    <div>
+        <label>Physics</label>
+        <input type="text" id="txtphy"  >
+    </div>
+    <div>
+        <label>Chemitry</label>
+        <input type="text" id="txtChe" >
+    </div>
+    <div>
+        <label>Math</label>
+        <input type="text"  id="txtMath">
+    </div>
+    <div>
+        <label>English</label>
+        <input type="text" id="txtEng" >
+    </div><div>
+        <label>Urdu</label>
+        <input type="text" id="txturdu" >
+    </div>
+    
+
+    <button onclick="fun()"> Submit 
+    </button>
+    <h2 ></h2>
+    <h2></h2>
+    
+<div id="tbldiv">
+    <table border="1" style="border-collapse: collapse;">
+        <thead>
+            <tr>
+                <th> Name</th>
+                <th> Physics</th>
+                <th> Chemistry</th>
+                <th> Maths</th>
+                <th> English</th>
+                <th> Urdu</th>
+                <th> Obtain Marks</th>
+                <th> Total Marks</th>
+                <th> Percentage</th>
+                
+                <th> Remarks</th>
+            </tr>
+        </thead>
+        <tbody id="tbldata">
+            
+
+        </tbody>
+    </table>
+
+</div>
+<script>
+    function fun(){
+        let Nam = document.querySelector("#Name").value ;
+        let Phy = parseInt(document.querySelector("#txtphy").value);
+        let che = parseInt(document.querySelector("#txtChe").value);
+        let Math = parseInt(document.querySelector("#txtMath").value);
+        let Eng = parseInt(document.querySelector("#txtEng").value);
+        let Urdu = parseInt(document.querySelector("#txturdu").value);
+        
+        let Obtain = Phy + che + Math + Eng + Urdu ;
+        //console.log(Obtain);
+        let perc = (Obtain/500)*100;
+        //console.log(perc);
+
+        //document.getElementById('td1').innerHTML = Name;
+
+
+
+        document.querySelector('#tbldiv').style.display= "block";
+        if(perc >= 80 && perc<=100){
+            let printdata= document.querySelectorAll('h2')[0];
+            printdata.innerHTML = 'Your Grade is A';
+            //console.log(printdata)
+            
+        }
+        else{
+            var printdata= document.querySelectorAll('h2')[1];
+            printdata.innerHTML = 'You are Fail';
+            
+        }
+
+        let tdata= document.querySelector("#tbldata");
+        tdata.innerHTML = "<tr><td>" + Nam + "</td><td>" + Phy + " </td><td>" + che + " </td><td>"+Math+"</td><td>"+Eng+"</td><td>"+Urdu+"</td><td>"+Obtain+"</td><td>500</td><td>"+perc+"</td><td>"+printdata+"</td></tr>"
+        
+
+
+        
+
+
+    }
+
+
+</script>
+
+
+</body>
+
+
+
+</html>
