@@ -67,6 +67,19 @@ if(isset($_GET['checkout'])){
 			$update->bindParam('productId', $pid);
 			$update->execute();
 			echo "<script>alert('order placed successfully')</script>";
+			
+			
+				$insertInvoice = $pdo->prepare("insert into invoices (u_id, u_name, u_email, p_id, p_name, p_price, p_qty) values (:uid, :uname, :uemail, :pid, :pname, :pprice, :pqty ) ");
+				$insertInvoice->bindParam(':uid', $uid);
+				$insertInvoice->bindParam(':uname', $uName);
+				$insertInvoice->bindParam(':uemail', $uEmail);
+				$insertInvoice->bindParam(':pid', $pid);
+				$insertInvoice->bindParam(':pname', $pName);
+				$insertInvoice->bindParam(':pprice', $pPrice);
+				$insertInvoice->bindParam(':pqty', $pQty);
+				$insertInvoice->execute();
+				echo "<script>alert('invoice Added')</script>";
+				
 			}
 		}
 
@@ -265,17 +278,18 @@ if(isset($_GET['checkout'])){
 						</div>
 						<?php
 						if(isset($_SESSION['useremail'])){
-							if(isset($_SESSION['cart'])){
-						?>
-						<a href="?checkout" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">Proceed to Checkout</a>
+								if(isset($_SESSION['cart'])){
+							?>
+								<a href="?checkout" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">Proceed to Checkout</a>
 
-                        <?php
-						}else{
-						?>
-						<a href="?checkout" style="pointer-events: none; cursor: default;" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">Proceed to Checkout</a>
-						<?php
-						}
-						}
+							<?php
+								
+								}else{
+							?>
+								<a href="?checkout" style="pointer-events: none; cursor: default;" class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">Proceed to Checkout</a>
+							<?php
+								}
+							}
 						else{
 						?>
 						<a href="login.php"  class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer">Proceed to Checkout</a>
@@ -283,7 +297,7 @@ if(isset($_GET['checkout'])){
 						}
 						?>
 						<br>
-						<a class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" name="" href="?unset" >Clear Cart</a>
+						<a class="flex-c-m stext-101 cl0 size-116 bg3 bor14 hov-btn3 p-lr-15 trans-04 pointer" name="" href="?unset" >Clear All Cart</a>
 					</div>
 				</div>
 			</div>
