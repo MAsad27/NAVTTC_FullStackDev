@@ -68,15 +68,17 @@ if(isset($_GET['checkout'])){
 			$update->execute();
 			echo "<script>alert('order placed successfully')</script>";
 			
-			
-				$insertInvoice = $pdo->prepare("insert into invoices (u_id, u_name, u_email, p_id, p_name, p_price, p_qty) values (:uid, :uname, :uemail, :pid, :pname, :pprice, :pqty ) ");
-				$insertInvoice->bindParam(':uid', $uid);
-				$insertInvoice->bindParam(':uname', $uName);
-				$insertInvoice->bindParam(':uemail', $uEmail);
-				$insertInvoice->bindParam(':pid', $pid);
-				$insertInvoice->bindParam(':pname', $pName);
-				$insertInvoice->bindParam(':pprice', $pPrice);
-				$insertInvoice->bindParam(':pqty', $pQty);
+			// error_reporting(E_ALL);
+			// ini_set('display_errors', 1);
+
+				$insertInvoice = $pdo->prepare("insert into invoices (u_id, u_name, u_email, p_id, p_name, p_price, p_qty) values (:userid, :username,:useremail,:proid, :proname, :proprice, :proqty)");
+				$insertInvoice->bindParam(':userid', $uid);
+				$insertInvoice->bindParam(':username', $uName);
+				$insertInvoice->bindParam(':useremail', $uEmail);
+				$insertInvoice->bindParam(':proid', $pid);
+				$insertInvoice->bindParam(':proname', $pName);
+				$insertInvoice->bindParam(':proprice', $pPrice);
+				$insertInvoice->bindParam(':proqty', $pQty);
 				$insertInvoice->execute();
 				echo "<script>alert('invoice Added')</script>";
 				

@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 16, 2024 at 01:34 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: May 19, 2024 at 11:07 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -51,6 +52,24 @@ INSERT INTO `categories` (`id`, `Name`, `Description`, `image`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `invoices`
+--
+
+CREATE TABLE `invoices` (
+  `id` int(11) NOT NULL,
+  `u_id` int(11) NOT NULL,
+  `u_name` varchar(300) NOT NULL,
+  `u_email` varchar(300) NOT NULL,
+  `p_name` varchar(300) NOT NULL,
+  `p_price` int(11) NOT NULL,
+  `p_qty` int(11) NOT NULL,
+  `status` varchar(200) NOT NULL DEFAULT 'Pending',
+  `dateTime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `orders`
 --
 
@@ -82,7 +101,13 @@ INSERT INTO `orders` (`id`, `p_id`, `p_name`, `p_qty`, `p_price`, `u_id`, `u_nam
 (8, 2, 'Gaon', 23, 5000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-14 08:09:24'),
 (9, 3, 'Techno', 1, 45000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-14 08:09:24'),
 (10, 7, 'Hand Bag', 4, 45678, 15, 'Admin', 'admin', 'pending', '2024-05-15 10:14:31'),
-(11, 3, 'Techno', 30, 45000, 15, 'Admin', 'admin', 'pending', '2024-05-15 10:14:31');
+(11, 3, 'Techno', 30, 45000, 15, 'Admin', 'admin', 'pending', '2024-05-15 10:14:31'),
+(12, 7, 'abc', 1, 45678, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-19 20:07:14'),
+(13, 7, 'abc', 1, 45678, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-19 20:27:36'),
+(14, 10, 'Keyboard', 1, 1000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-19 20:34:27'),
+(15, 2, 'Gaon', 1, 5000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-19 20:38:23'),
+(16, 3, 'Techno', 1, 45000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-19 20:52:46'),
+(17, 3, 'Techno', 1, 45000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-19 21:03:02');
 
 -- --------------------------------------------------------
 
@@ -106,14 +131,14 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `quantity`, `image`, `catid`, `procid`) VALUES
-(2, 'Gaon', 'ASD', 5000, 2, 'Screenshot 2024-02-29 174953.png', 13, NULL),
-(3, 'Techno', 'Mob', 45000, 5, 'Mob.jpg', 14, NULL),
+(2, 'Gaon', 'ASD', 5000, 1, 'Screenshot 2024-02-29 174953.png', 13, NULL),
+(3, 'Techno', 'Mob', 45000, 3, 'Mob.jpg', 14, NULL),
 (5, 'Hand Bag', 'asd', 5000, 1, 'images.jfif', 1, NULL),
 (6, 'Hand Carry', 'bag', 12345, 42, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1, NULL),
-(7, 'abc', 'asdf', 45678, 4, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1, NULL),
+(7, 'abc', 'asdf', 45678, 2, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1, NULL),
 (8, 'Phone', 'dhkj', 50000, 2, '', 14, 'PR-94fd5f49-136f-11ef-9c61-90b11c60f675'),
 (9, 'Mouse', 'Input device', 500, 1, '123', 2, 'PR-b2524e23-1371-11ef-9c61-90b11c60f675'),
-(10, 'Keyboard', 'Input Device', 1000, 1, 'download (1).jfif', 2, 'PR-259641ce-1372-11ef-9c61-90b11c60f675');
+(10, 'Keyboard', 'Input Device', 1000, 0, 'download (1).jfif', 2, 'PR-259641ce-1372-11ef-9c61-90b11c60f675');
 
 --
 -- Triggers `products`
@@ -207,6 +232,12 @@ ALTER TABLE `categories`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `invoices`
+--
+ALTER TABLE `invoices`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
@@ -244,10 +275,16 @@ ALTER TABLE `categories`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
+-- AUTO_INCREMENT for table `invoices`
+--
+ALTER TABLE `invoices`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `products`
