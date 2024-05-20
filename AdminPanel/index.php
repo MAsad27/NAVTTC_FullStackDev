@@ -88,60 +88,44 @@ if(!isset($_SESSION['adminemail'])){
                             <thead>
                                 <tr class="text-dark">
                                     <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Invoice</th>
-                                    <th scope="col">Customer</th>
-                                    <th scope="col">Amount</th>
-                                    <th scope="col">Status</th>
+                                    <th scope="col">Invoice ID</th>
+                                    <th scope="col">Customer Name</th>
+                                    <th scope="col">Customer Email</th>
+                                    <th scope="col">Total Price</th>
+                                    <th scope="col">Total Quantity</th>
+                                    <th scope="col">Order Date & Time</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                $query = $pdo->query("select * from invoices");
+                                $Allinvoices = $query->fetchAll(PDO::FETCH_ASSOC);
+                                foreach ($Allinvoices as $invoice) {
+                                    
+                                
+                                ?>
                                 <tr>
                                     <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                    <td><?php echo $invoice['id'] ?></td>
+                                    <td><?php echo $invoice['u_name'] ?></td>
+                                    <td><?php echo $invoice['u_email'] ?></td>
+                                    <td><?php echo $invoice['total_price'] ?></td>
+                                    <td><?php echo $invoice['total_qty'] ?></td>
+                                    <td><?php echo $invoice['dateTime'] ?></td>
+                                    <?php
+                                    // if(isset($))
+                                    ?>
+                                    <td>
+                                    <form action="email.php" method="post">   
+                                    <input type="hidden" name="userEmail" value="<?php echo $invoice['u_email'] ?>"> 
+                                    <button class="btn btn-sm btn-primary" name="sendEmail" >Confirm Order</button>
+                                    </form></td>
                                 </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
-                                <tr>
-                                    <td><input class="form-check-input" type="checkbox"></td>
-                                    <td>01 Jan 2045</td>
-                                    <td>INV-0123</td>
-                                    <td>Jhon Doe</td>
-                                    <td>$123</td>
-                                    <td>Paid</td>
-                                    <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                                </tr>
+                                <?php
+                                }
+                                ?>
+                                  
                             </tbody>
                         </table>
                     </div>

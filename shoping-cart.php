@@ -67,30 +67,29 @@ if(isset($_GET['checkout'])){
 			$update->bindParam('orderedQty', $pQty);
 			$update->bindParam('productId', $pid);
 			$update->execute();
-			echo "<script>alert('order placed successfully')</script>";
+			
 			
 			// error_reporting(E_ALL);
 			// ini_set('display_errors', 1);
 			}
+			echo "<script>alert('order placed successfully')</script>";
 		}
 		$totalPrice = 0 ;
 		$totalQty = 0 ;
-			foreach($_SESSION['cart'] as $sTotal){
-				$subtotal = $sTotal['qty'] * $sTotal['price'];
+		foreach($_SESSION['cart'] as $key=>$value){
+				$subtotal = $value['qty'] * $value['price'];
 				$totalPrice += $subtotal;
-				$totalQty += $sTotal['qty'];
-				print_r($totalQty);
-				print_r($totalPrice);
+				$totalQty += $value['qty'];
+				
 			}
-			
-		$insertInvoice = $pdo->prepare("insert into invoices (u_id, u_name, u_email, p_id, p_name, p_price, p_qty) values (:userid, :username, :useremail,:proid, :proname, :proprice, :proqty)");
+			// print_r($totalPrice);
+			// print_r($totalQty);
+		$insertInvoice = $pdo->prepare("insert into invoices (u_id, u_name, u_email, total_price, total_qty) values (:userid, :username, :useremail,:totalprice, :totalqty)");
 		$insertInvoice->bindParam(':userid', $uid);
 		$insertInvoice->bindParam(':username', $uName);
 		$insertInvoice->bindParam(':useremail', $uEmail);
-		$insertInvoice->bindParam(':proid', $pid);
-		$insertInvoice->bindParam(':proname', $pName);
-		$insertInvoice->bindParam(':proprice', $pPrice);
-		$insertInvoice->bindParam(':proqty', $pQty);
+		$insertInvoice->bindParam(':totalprice', $totalPrice);
+		$insertInvoice->bindParam(':totalqty', $totalQty);
 		 $insertInvoice->execute();
 	
 		echo "<script>alert('invoice Added')</script>";
