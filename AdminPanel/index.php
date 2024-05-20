@@ -5,6 +5,10 @@ include('header.php');
 if(!isset($_SESSION['adminemail'])){
     echo "<script>location.assign('../index.php')</script>";
 }
+if(isset($_post['sendEmail'])){
+    $updateStatus = $pdo->$prepare("update invoices set status = 'Approved' ");
+    $updateStatus->execute();
+}
 ?>
             <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4">
@@ -114,18 +118,32 @@ if(!isset($_SESSION['adminemail'])){
                                     <td><?php echo $invoice['total_qty'] ?></td>
                                     <td><?php echo $invoice['dateTime'] ?></td>
                                     <?php
-                                    // if(isset($))
+                                        if($invoice['status'] == "Pending"){
+                                        ?>
+                                        <td>
+                                            <form action="email.php" method="post">   
+                                            <input type="hidden" name="userEmail" value="<?php echo $invoice['u_email'] ?>"> 
+                                            <button class="btn btn-sm btn-primary" name="sendEmail" >Confirm Order</button>
+                                            </form>
+                                            
+                                        </td>
+                                        <?php
+                                        }
+                                        else{
+                                        ?>
+                                        <td>
+                                            <form action="email.php" method="post">   
+                                            <button class="btn btn-sm btn-primary" name="" >Approved</button>
+                                            </form>
+                                        </td>
+                                    <?php
+                                        }
                                     ?>
-                                    <td>
-                                    <form action="email.php" method="post">   
-                                    <input type="hidden" name="userEmail" value="<?php echo $invoice['u_email'] ?>"> 
-                                    <button class="btn btn-sm btn-primary" name="sendEmail" >Confirm Order</button>
-                                    </form></td>
                                 </tr>
-                                <?php
-                                }
-                                ?>
-                                  
+                                    <?php
+                                    }
+                                    ?>
+                                    
                             </tbody>
                         </table>
                     </div>
