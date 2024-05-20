@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2024 at 11:07 PM
--- Server version: 10.4.11-MariaDB
--- PHP Version: 7.4.2
+-- Generation Time: May 20, 2024 at 03:02 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -60,12 +59,20 @@ CREATE TABLE `invoices` (
   `u_id` int(11) NOT NULL,
   `u_name` varchar(300) NOT NULL,
   `u_email` varchar(300) NOT NULL,
-  `p_name` varchar(300) NOT NULL,
-  `p_price` int(11) NOT NULL,
-  `p_qty` int(11) NOT NULL,
+  `total_price` int(11) NOT NULL,
+  `total_qty` int(11) NOT NULL,
   `status` varchar(200) NOT NULL DEFAULT 'Pending',
   `dateTime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `invoices`
+--
+
+INSERT INTO `invoices` (`id`, `u_id`, `u_name`, `u_email`, `total_price`, `total_qty`, `status`, `dateTime`) VALUES
+(26, 15, 'Shabhi', 'shabhinaqvi759@gmail.com', 69690, 3, 'Pending', '2024-05-20 12:56:48'),
+(27, 15, 'Admin', 'shabhinaqvi759@gmail.com', 116046, 4, 'Approved', '2024-05-20 12:56:33'),
+(28, 15, 'Admin', 'admin', 181356, 4, 'Pending', '2024-05-20 12:56:56');
 
 -- --------------------------------------------------------
 
@@ -107,7 +114,56 @@ INSERT INTO `orders` (`id`, `p_id`, `p_name`, `p_qty`, `p_price`, `u_id`, `u_nam
 (14, 10, 'Keyboard', 1, 1000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-19 20:34:27'),
 (15, 2, 'Gaon', 1, 5000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-19 20:38:23'),
 (16, 3, 'Techno', 1, 45000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-19 20:52:46'),
-(17, 3, 'Techno', 1, 45000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-19 21:03:02');
+(17, 3, 'Techno', 1, 45000, 12, 'kashif', 'kashi@gmail.com', 'pending', '2024-05-19 21:03:02'),
+(18, 5, 'Hand Bag', 1, 5000, 15, 'Admin', 'admin', 'pending', '2024-05-18 05:04:41'),
+(19, 2, 'Gaon', 1, 5000, 15, 'Admin', 'admin', 'pending', '2024-05-18 05:08:57'),
+(20, 5, 'Hand Bag', 1, 5000, 15, 'Admin', 'admin', 'pending', '2024-05-18 05:08:57'),
+(21, 3, 'Techno', 1, 45000, 15, 'Admin', 'admin', 'pending', '2024-05-18 05:13:54'),
+(22, 3, 'Techno', 2, 45000, 15, 'Admin', 'admin', 'pending', '2024-05-18 05:17:41'),
+(23, 6, 'Hand Carry', 1, 12345, 15, 'Admin', 'admin', 'pending', '2024-05-18 05:17:41'),
+(24, 6, 'Hand Carry', 3, 12345, 15, 'Admin', 'admin', 'pending', '2024-05-18 05:24:51'),
+(25, 6, 'Hand Carry', 3, 12345, 15, 'Admin', 'admin', 'pending', '2024-05-18 05:24:55'),
+(26, 6, 'Hand Carry', 3, 12345, 15, 'Admin', 'admin', 'pending', '2024-05-18 05:25:45'),
+(27, 5, 'Hand Bag', 2, 5000, 15, 'Admin', 'admin', 'pending', '2024-05-18 05:25:45'),
+(28, 7, 'abc', 2, 45678, 15, 'Admin', 'admin', 'pending', '2024-05-18 05:26:48'),
+(29, 10, 'Keyboard', 2, 1000, 15, 'Admin', 'admin', 'pending', '2024-05-18 05:26:48'),
+(30, 10, 'Keyboard', 1, 1000, 15, 'Admin', 'admin', 'pending', '2024-05-18 05:57:06'),
+(31, 3, 'Techno', 1, 45000, 15, 'Admin', 'admin', 'pending', '2024-05-18 05:57:06'),
+(32, 10, 'Keyboard', 1, 1000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:09:56'),
+(33, 5, 'Hand Bag', 1, 5000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:10:42'),
+(34, 10, 'Keyboard', 2, 1000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:10:42'),
+(35, 10, 'Keyboard', 2, 1000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:11:49'),
+(36, 3, 'Techno', 1, 45000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:11:49'),
+(37, 10, 'Keyboard', 1, 1000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:16:45'),
+(38, 8, 'Phone', 2, 50000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:16:45'),
+(39, 7, 'abc', 2, 45678, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:22:13'),
+(40, 10, 'Keyboard', 1, 1000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:22:13'),
+(41, 3, 'Techno', 1, 45000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:22:48'),
+(42, 10, 'Keyboard', 1, 1000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:23:44'),
+(43, 2, 'Gaon', 2, 5000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:23:44'),
+(44, 10, 'Keyboard', 3, 1000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:24:56'),
+(45, 5, 'Hand Bag', 2, 5000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:25:27'),
+(46, 7, 'abc', 3, 45678, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:25:27'),
+(47, 10, 'Keyboard', 1, 1000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:28:10'),
+(48, 7, 'abc', 3, 45678, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:28:10'),
+(49, 5, 'Hand Bag', 1, 5000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:30:18'),
+(50, 7, 'abc', 3, 45678, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:30:18'),
+(51, 3, 'Techno', 1, 45000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:34:33'),
+(52, 5, 'Hand Bag', 2, 5000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:34:33'),
+(53, 2, 'Gaon', 1, 5000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:35:49'),
+(54, 5, 'Hand Bag', 1, 5000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:35:49'),
+(55, 10, 'Keyboard', 2, 1000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:38:07'),
+(56, 2, 'Gaon', 2, 5000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:38:07'),
+(57, 3, 'Techno', 2, 45000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:39:08'),
+(58, 6, 'Hand Carry', 3, 12345, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:39:08'),
+(59, 3, 'Techno', 2, 45000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:54:38'),
+(60, 10, 'Keyboard', 3, 1000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:54:39'),
+(61, 3, 'Techno', 1, 45000, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:56:17'),
+(62, 6, 'Hand Carry', 2, 12345, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:56:17'),
+(63, 6, 'Hand Carry', 2, 12345, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:57:21'),
+(64, 7, 'abc', 2, 45678, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:57:21'),
+(65, 3, 'Techno', 2, 45000, 15, 'Admin', 'admin', 'pending', '2024-05-20 12:55:09'),
+(66, 7, 'abc', 2, 45678, 15, 'Admin', 'admin', 'pending', '2024-05-20 12:55:09');
 
 -- --------------------------------------------------------
 
@@ -131,13 +187,13 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `quantity`, `image`, `catid`, `procid`) VALUES
-(2, 'Gaon', 'ASD', 5000, 1, 'Screenshot 2024-02-29 174953.png', 13, NULL),
-(3, 'Techno', 'Mob', 45000, 3, 'Mob.jpg', 14, NULL),
-(5, 'Hand Bag', 'asd', 5000, 1, 'images.jfif', 1, NULL),
-(6, 'Hand Carry', 'bag', 12345, 42, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1, NULL),
-(7, 'abc', 'asdf', 45678, 2, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1, NULL),
-(8, 'Phone', 'dhkj', 50000, 2, '', 14, 'PR-94fd5f49-136f-11ef-9c61-90b11c60f675'),
-(9, 'Mouse', 'Input device', 500, 1, '123', 2, 'PR-b2524e23-1371-11ef-9c61-90b11c60f675'),
+(2, 'Gaon', 'ASD', 5000, 5, 'Screenshot 2024-02-29 174953.png', 13, NULL),
+(3, 'Techno', 'Mob', 45000, 21, 'Mob.jpg', 14, NULL),
+(5, 'Hand Bag', 'asd', 5000, 0, 'images.jfif', 1, NULL),
+(6, 'Hand Carry', 'bag', 12345, 25, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1, NULL),
+(7, 'abc', 'asdf', 45678, 4, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1, NULL),
+(8, 'Phone', 'dhkj', 50000, 18, '', 14, 'PR-94fd5f49-136f-11ef-9c61-90b11c60f675'),
+(9, 'Mouse', 'Input device', 500, 100, '123', 2, 'PR-b2524e23-1371-11ef-9c61-90b11c60f675'),
 (10, 'Keyboard', 'Input Device', 1000, 0, 'download (1).jfif', 2, 'PR-259641ce-1372-11ef-9c61-90b11c60f675');
 
 --
@@ -278,13 +334,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
 
 --
 -- AUTO_INCREMENT for table `products`
