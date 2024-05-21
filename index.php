@@ -184,7 +184,7 @@ include('header.php');
 							<i class="zmdi zmdi-search"></i>
 						</button>
 
-						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
+						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" id="inp_val" name="search-product" placeholder="Search">
 					</div>	
 				</div>
 
@@ -377,8 +377,8 @@ include('header.php');
 					</div>
 				</div>
 			</div>
-
-			<div class="row isotope-grid">
+					<!-- Show Products -->
+			<div class="row isotope-grid" id="showProductRow">
 				<?php
 				$query = $pdo->query("select * from products");
 				$allProducts = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -432,6 +432,22 @@ include('header.php');
 	</section>
 
 
+<script>
+	$(document).ready(function(){
+		$('#inp_val').keyup(function(){
+			let inp = $(this).val();
+			if($inp != ""){
+				$.ajax({
+					url : "query.php",
+					type : "post",
+					data : {inp:search-product},
+					success : function(data){
+						$('#showProductRow').html(data);
+					}
+				})
+			}
+		})
+	})
 </script>
 <?php
 include('footer.php');

@@ -299,30 +299,27 @@ if(isset($_GET['unset'])){
 				<ul class="header-cart-wrapitem w-full">
 				<?php 
 					if(isset($_SESSION['cart'])){
-					foreach($_SESSION['cart'] as $value){
-						$totalprice = $value['qty'] * $value['price'];
-						echo $totalprice;
+						$grandTotal = 0;
+						foreach($_SESSION['cart'] as $value){
+							$subtotal = $value['qty'] * $value['price'];
+							$grandTotal += $subtotal;
 					?>	
 
 				
 					<li class="header-cart-item flex-w flex-t m-b-12">
 						<div class="header-cart-item-img">
-							<img src="<?php echo $value['image']?>"  alt="<?php echo $value['name']?>" >
+							<img src="AdminPanel/img/<?php echo $value['image']?>">
 						</div>
 
 						<div class="header-cart-item-txt p-t-8">
 							<a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+							<?php echo $value['name']?>
+							<span class="header-cart-item-info">
+								<?php echo $value['qty']?> x <?php echo $value['price']?>
 								
-								<span class="header-cart-item-info">
-								<?php echo $value['qty']?>
-								1 x $19.00
 							</span>
 							</a>
 							
-
-							<span class="header-cart-item-info">
-								1 x $19.00
-							</span>
 						</div>
 					</li>
 					<?php
@@ -332,7 +329,7 @@ if(isset($_GET['unset'])){
 				
 				<div class="w-full">
 					<div class="header-cart-total w-full p-tb-40">
-						Total: $75.00
+					 <b>Grand Total:</b>	Rs. <?php echo $grandTotal?>/-
 					</div>
 
 					<div class="header-cart-buttons flex-w w-full">

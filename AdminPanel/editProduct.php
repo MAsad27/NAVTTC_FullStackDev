@@ -8,7 +8,7 @@ if(isset($_GET['id'])){
 
     $query = $pdo->prepare("select products.* , categories.Name as CatName from products
     join categories on products.catid=categories.id where products.id = :pid");
-    $query->bindParam('pid',$id);..
+    $query->bindParam('pid',$id);
 
     
     $query-> execute();

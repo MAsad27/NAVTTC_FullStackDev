@@ -6,9 +6,17 @@ if(!isset($_SESSION['adminemail'])){
     echo "<script>location.assign('../index.php')</script>";
 }
 if(isset($_post['sendEmail'])){
-    $updateStatus = $pdo->$prepare("update invoices set status = 'Approved' ");
+    $status = 'Approved';
+    $updateStatus = $pdo->$prepare("update invoices set status = :stat ");
+    $updateStatus->bindParam(':stat', $status);
+    $update = $updateStatus->fetch(PDO::FETCH_ASSOC);
     $updateStatus->execute();
 }
+$query = $pdo->query("select sum(total_price) from invoices where date(dateTime) = CURRENT_DATE()");
+$value = $query->fetchColumn();
+$allProPrice = $pdo->query("select sum(total_price) from invoices");
+$ProTotalPrice = $allProPrice->fetchColumn();
+// print_r ($value);
 ?>
             <!-- Sale & Revenue Start -->
             <div class="container-fluid pt-4 px-4">
@@ -18,7 +26,7 @@ if(isset($_post['sendEmail'])){
                             <i class="fa fa-chart-line fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Today Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">Rs. <?php echo $value ?>/-</h6>
                               </div>
                         </div>
                     </div>
@@ -27,7 +35,7 @@ if(isset($_post['sendEmail'])){
                             <i class="fa fa-chart-bar fa-3x text-primary"></i>
                             <div class="ms-3">
                                 <p class="mb-2">Total Sale</p>
-                                <h6 class="mb-0">$1234</h6>
+                                <h6 class="mb-0">Rs. <?php echo $ProTotalPrice ?>/-</h6>
                             </div>
                         </div>
                     </div>

@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2024 at 03:02 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Generation Time: May 20, 2024 at 11:04 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `categories` (
   `Name` varchar(200) DEFAULT NULL,
   `Description` varchar(500) NOT NULL,
   `image` varchar(300) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `categories`
@@ -63,7 +63,7 @@ CREATE TABLE `invoices` (
   `total_qty` int(11) NOT NULL,
   `status` varchar(200) NOT NULL DEFAULT 'Pending',
   `dateTime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `invoices`
@@ -72,7 +72,9 @@ CREATE TABLE `invoices` (
 INSERT INTO `invoices` (`id`, `u_id`, `u_name`, `u_email`, `total_price`, `total_qty`, `status`, `dateTime`) VALUES
 (26, 15, 'Shabhi', 'shabhinaqvi759@gmail.com', 69690, 3, 'Pending', '2024-05-20 12:56:48'),
 (27, 15, 'Admin', 'shabhinaqvi759@gmail.com', 116046, 4, 'Approved', '2024-05-20 12:56:33'),
-(28, 15, 'Admin', 'admin', 181356, 4, 'Pending', '2024-05-20 12:56:56');
+(28, 15, 'Admin', 'admin', 181356, 4, 'Pending', '2024-05-20 12:56:56'),
+(29, 16, 'hasan', 'hasan', 135678, 3, 'Pending', '2024-05-20 19:08:17'),
+(30, 16, 'hasan', 'hasan', 150000, 6, 'Pending', '2024-05-20 19:35:07');
 
 -- --------------------------------------------------------
 
@@ -91,7 +93,7 @@ CREATE TABLE `orders` (
   `u_email` varchar(200) NOT NULL,
   `status` varchar(200) DEFAULT 'pending',
   `dateTime` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `orders`
@@ -163,7 +165,12 @@ INSERT INTO `orders` (`id`, `p_id`, `p_name`, `p_qty`, `p_price`, `u_id`, `u_nam
 (63, 6, 'Hand Carry', 2, 12345, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:57:21'),
 (64, 7, 'abc', 2, 45678, 15, 'Admin', 'admin', 'pending', '2024-05-18 06:57:21'),
 (65, 3, 'Techno', 2, 45000, 15, 'Admin', 'admin', 'pending', '2024-05-20 12:55:09'),
-(66, 7, 'abc', 2, 45678, 15, 'Admin', 'admin', 'pending', '2024-05-20 12:55:09');
+(66, 7, 'abc', 2, 45678, 15, 'Admin', 'admin', 'pending', '2024-05-20 12:55:09'),
+(67, 7, 'abc', 1, 45678, 16, 'hasan', 'hasan', 'pending', '2024-05-20 19:08:17'),
+(68, 3, 'Techno', 2, 45000, 16, 'hasan', 'hasan', 'pending', '2024-05-20 19:08:17'),
+(69, 5, 'Hand Bag', 1, 5000, 16, 'hasan', 'hasan', 'pending', '2024-05-20 19:35:07'),
+(70, 3, 'Techno', 3, 45000, 16, 'hasan', 'hasan', 'pending', '2024-05-20 19:35:07'),
+(71, 2, 'Gaon', 2, 5000, 16, 'hasan', 'hasan', 'pending', '2024-05-20 19:35:07');
 
 -- --------------------------------------------------------
 
@@ -180,21 +187,20 @@ CREATE TABLE `products` (
   `image` varchar(500) NOT NULL,
   `catid` int(11) NOT NULL,
   `procid` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `name`, `description`, `price`, `quantity`, `image`, `catid`, `procid`) VALUES
-(2, 'Gaon', 'ASD', 5000, 5, 'Screenshot 2024-02-29 174953.png', 13, NULL),
-(3, 'Techno', 'Mob', 45000, 21, 'Mob.jpg', 14, NULL),
-(5, 'Hand Bag', 'asd', 5000, 0, 'images.jfif', 1, NULL),
+(2, 'Gaon', 'ASD', 5000, 3, 'Screenshot 2024-02-29 174953.png', 13, NULL),
+(3, 'Techno', 'Mob', 45000, 16, 'Mob.jpg', 14, NULL),
+(5, 'Hand Bag', 'asd', 5000, 19, 'images.jfif', 1, NULL),
 (6, 'Hand Carry', 'bag', 12345, 25, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1, NULL),
-(7, 'abc', 'asdf', 45678, 4, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1, NULL),
-(8, 'Phone', 'dhkj', 50000, 18, '', 14, 'PR-94fd5f49-136f-11ef-9c61-90b11c60f675'),
+(7, 'abc', 'asdf', 45678, 3, 'cb7a4018b4ead03b272c9d5d9449af63.jpg', 1, NULL),
 (9, 'Mouse', 'Input device', 500, 100, '123', 2, 'PR-b2524e23-1371-11ef-9c61-90b11c60f675'),
-(10, 'Keyboard', 'Input Device', 1000, 0, 'download (1).jfif', 2, 'PR-259641ce-1372-11ef-9c61-90b11c60f675');
+(10, 'Keyboard', 'Input Device', 1000, 34, 'download (1).jfif', 2, 'PR-259641ce-1372-11ef-9c61-90b11c60f675');
 
 --
 -- Triggers `products`
@@ -232,7 +238,7 @@ CREATE TABLE `students` (
   `salary` varchar(100) DEFAULT NULL,
   `department` varchar(200) DEFAULT NULL,
   `address` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `students`
@@ -260,7 +266,7 @@ CREATE TABLE `users` (
   `email` varchar(200) NOT NULL,
   `password` varchar(300) NOT NULL,
   `roleid` int(11) NOT NULL DEFAULT 2
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -274,7 +280,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `roleid`) VALUES
 (12, 'kashif', 'kashi@gmail.com', '95938f7d0a9581a694282ebac1c4c49e0e19c1cd', 2),
 (13, 'ahmad', 'ahamd@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2),
 (14, 'asad', 'asad@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1),
-(15, 'Admin', 'admin', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2),
+(15, 'Admin', 'admin', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1),
 (16, 'hasan', 'hasan', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2);
 
 --
@@ -334,13 +340,13 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `invoices`
 --
 ALTER TABLE `invoices`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- AUTO_INCREMENT for table `products`

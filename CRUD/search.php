@@ -51,7 +51,7 @@ $(document).ready(function(){
             $.ajax({
                 url: "query.php",
                 type: "post",
-                data : {searchInp:inputVal}, //need to ask about this line
+                data : {searchInp:inputVal}, 
                 success : function(data){
                     $('tbody').html(data);
                 }
