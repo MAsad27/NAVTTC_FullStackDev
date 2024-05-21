@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 20, 2024 at 11:04 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- Generation Time: May 21, 2024 at 12:30 PM
+-- Server version: 10.4.24-MariaDB
+-- PHP Version: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -32,7 +32,7 @@ CREATE TABLE `categories` (
   `Name` varchar(200) DEFAULT NULL,
   `Description` varchar(500) NOT NULL,
   `image` varchar(300) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `categories`
@@ -63,7 +63,7 @@ CREATE TABLE `invoices` (
   `total_qty` int(11) NOT NULL,
   `status` varchar(200) NOT NULL DEFAULT 'Pending',
   `dateTime` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `invoices`
@@ -71,8 +71,8 @@ CREATE TABLE `invoices` (
 
 INSERT INTO `invoices` (`id`, `u_id`, `u_name`, `u_email`, `total_price`, `total_qty`, `status`, `dateTime`) VALUES
 (26, 15, 'Shabhi', 'shabhinaqvi759@gmail.com', 69690, 3, 'Pending', '2024-05-20 12:56:48'),
-(27, 15, 'Admin', 'shabhinaqvi759@gmail.com', 116046, 4, 'Approved', '2024-05-20 12:56:33'),
-(28, 15, 'Admin', 'admin', 181356, 4, 'Pending', '2024-05-20 12:56:56'),
+(27, 15, 'Admin', 'asadmehboob27@gmail.com', 116046, 4, 'Approved', '2024-05-21 09:48:59'),
+(28, 15, 'Admin', 'asadmehboob27@gmail.com', 181356, 4, 'Approved', '2024-05-21 09:51:07'),
 (29, 16, 'hasan', 'hasan', 135678, 3, 'Pending', '2024-05-20 19:08:17'),
 (30, 16, 'hasan', 'hasan', 150000, 6, 'Pending', '2024-05-20 19:35:07');
 
@@ -93,7 +93,7 @@ CREATE TABLE `orders` (
   `u_email` varchar(200) NOT NULL,
   `status` varchar(200) DEFAULT 'pending',
   `dateTime` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `orders`
@@ -187,7 +187,7 @@ CREATE TABLE `products` (
   `image` varchar(500) NOT NULL,
   `catid` int(11) NOT NULL,
   `procid` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `products`
@@ -238,7 +238,7 @@ CREATE TABLE `students` (
   `salary` varchar(100) DEFAULT NULL,
   `department` varchar(200) DEFAULT NULL,
   `address` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `students`
@@ -266,7 +266,7 @@ CREATE TABLE `users` (
   `email` varchar(200) NOT NULL,
   `password` varchar(300) NOT NULL,
   `roleid` int(11) NOT NULL DEFAULT 2
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
@@ -280,7 +280,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `roleid`) VALUES
 (12, 'kashif', 'kashi@gmail.com', '95938f7d0a9581a694282ebac1c4c49e0e19c1cd', 2),
 (13, 'ahmad', 'ahamd@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2),
 (14, 'asad', 'asad@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1),
-(15, 'Admin', 'admin', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1),
+(15, 'Admin', 'asadmehboob27@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1),
 (16, 'hasan', 'hasan', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2);
 
 --

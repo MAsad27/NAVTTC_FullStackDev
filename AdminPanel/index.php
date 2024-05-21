@@ -5,13 +5,7 @@ include('header.php');
 if(!isset($_SESSION['adminemail'])){
     echo "<script>location.assign('../index.php')</script>";
 }
-if(isset($_post['sendEmail'])){
-    $status = 'Approved';
-    $updateStatus = $pdo->$prepare("update invoices set status = :stat ");
-    $updateStatus->bindParam(':stat', $status);
-    $update = $updateStatus->fetch(PDO::FETCH_ASSOC);
-    $updateStatus->execute();
-}
+
 $query = $pdo->query("select sum(total_price) from invoices where date(dateTime) = CURRENT_DATE()");
 $value = $query->fetchColumn();
 $allProPrice = $pdo->query("select sum(total_price) from invoices");
@@ -129,9 +123,10 @@ $ProTotalPrice = $allProPrice->fetchColumn();
                                         if($invoice['status'] == "Pending"){
                                         ?>
                                         <td>
-                                            <form action="email.php" method="post">   
+                                            <form action="email.php" method="post"> 
+                                            <input type="hidden" name="invoiceid" value="<?php echo $invoice['id'] ?>">  
                                             <input type="hidden" name="userEmail" value="<?php echo $invoice['u_email'] ?>"> 
-                                            <button class="btn btn-sm btn-primary" name="sendEmail" >Confirm Order</button>
+                                            <button class="btn btn-sm btn-primary" name="sendEmail" ><?php echo $invoice['status'] ?></button>
                                             </form>
                                             
                                         </td>
@@ -141,7 +136,7 @@ $ProTotalPrice = $allProPrice->fetchColumn();
                                         ?>
                                         <td>
                                             <form action="email.php" method="post">   
-                                            <button class="btn btn-sm btn-primary" name="" >Approved</button>
+                                            <button class="btn btn-sm btn-primary" name="" ><?php echo $invoice['status'] ?></button>
                                             </form>
                                         </td>
                                     <?php
